@@ -1,0 +1,4 @@
+client_name,client_email,store_name,store_url,module_name,module_benefit,product_slug
+Jean Dupont,jean@exemple-boutique.fr,Boutique Mode Paris,https://exemple-boutique.fr,PerfectSearch™,eliminate search latency with instant sub-50ms AJAX autocomplete,perfectsearch
+Marco Rossi,marco@rossistore.it,Rossi Outdoor,https://rossistore.it,FestiveFlow™,boost holiday conversion with seasonal atmosphere and interactive coupon boxes,festiveflow
+Maria Garcia,maria@tiendaonline.es,Tienda Gourmet,https://tiendaonline.es,PerfectSearch™,deliver soundex typo-tolerant live search with zero SaaS fees,perfectsearch

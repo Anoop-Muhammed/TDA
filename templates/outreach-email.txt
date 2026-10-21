@@ -1,0 +1,35 @@
+Subject: PrestaShop performance & custom module for {{store_name}}
+
+Hi {{client_name}},
+
+I came across your PrestaShop store ({{store_url}}) and wanted to reach out directly with a solution engineered specifically for high-conversion stores like yours.
+
+We are a specialized engineering team of 3 senior developers, and we have built {{module_name}} — a dedicated PrestaShop module designed to help store owners {{module_benefit}} without third-party SaaS fees, bloat, or slow response times.
+
+Rather than just describing it, you can test drive it in action right now:
+
+• Live Module Showcase & Architecture: https://tda.workn.in/#/products/{{product_slug}}
+• Interactive Sandbox & Live Demo: {{demo_url}}
+
+Beyond our standalone modules, we provide full PrestaShop development services:
+- Custom module development & third-party API integrations (ERP, CRM, logistics)
+- Database latency reduction, sub-50ms search engines & Core Web Vitals tuning
+- Frictionless checkout UX & custom theme development
+- PrestaShop 1.7 to 8.x / 9.x migrations, security audits & bug fixing
+
+Our approach is straightforward: you work directly with senior developers, not agency account managers. We provide honest technical advice, zero exaggerated promises, and transparent communication.
+
+Would you be open to a quick 5-minute chat, or having us audit your store's setup to see if {{module_name}} is a good fit?
+
+Just reply to this email, and we can take it from there.
+
+Best regards,
+
+{{sender_name}}
+Senior PrestaShop Specialist | TDA Web Services
+Website: https://tda.workn.in
+Direct Email: tdawebservices@gmail.com
+Phone / WhatsApp: {{phone_number}}
+
+---
+Note: If you do not wish to receive future communications, simply reply with "Unsubscribe" and we will respect your request immediately.
