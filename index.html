@@ -1,0 +1,4300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TDA Engineering Studio | PrestaShop Modules & Bespoke E-Commerce Development</title>
+  
+  <!-- SEO & OpenGraph Meta Tags -->
+  <meta name="description" content="Production-grade PrestaShop modules & bespoke e-commerce engineering by 3 senior full-stack developers. Discover PerfectSearch (sub-50ms live search) & FestiveFlow (seasonal atmosphere suite). Direct engineer collaboration.">
+  <meta name="keywords" content="PrestaShop modules, PerfectSearch, FestiveFlow, PrestaShop search module, e-commerce live search, seasonal marketing module, PrestaShop developers, Laravel development, WooCommerce experts, TDA Studio">
+  <meta name="author" content="TDA Engineering Studio">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://tda-studio.com/">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://tda-studio.com/">
+  <meta property="og:title" content="TDA Engineering Studio | PrestaShop Modules & E-Commerce Engineering">
+  <meta property="og:description" content="Discover PerfectSearch & FestiveFlow: Production-grade PrestaShop modules engineered for speed, conversions, and direct developer support.">
+  <meta property="og:image" content="/assets/images/logo-tda.png">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/logo-tda.png">
+
+  <!-- Typography: Bricolage Grotesque, Hanken Grotesk, DM Mono (from norra.html) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Hanken+Grotesk:wght@300..700&family=DM+Mono:wght@400;500&display=swap">
+
+  <!-- JSON-LD Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": "https://tda-studio.com/#organization",
+        "name": "TDA Engineering Studio",
+        "url": "https://tda-studio.com/",
+        "logo": "https://tda-studio.com/assets/images/logo-tda.png",
+        "email": "tdawebservices@gmail.com",
+        "description": "Boutique e-commerce engineering studio founded by 3 senior full-stack developers specializing in PrestaShop, Laravel, WooCommerce, and high-performance custom modules."
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://tda-studio.com/#perfectsearch",
+        "name": "PerfectSearch - Fast AJAX Live Search & Filters for PrestaShop",
+        "operatingSystem": "PrestaShop 1.7.0.0 - 9.x, PHP 7.4 - 8.3",
+        "applicationCategory": "BusinessApplication, E-Commerce Tool",
+        "description": "Standalone sub-50ms live AJAX search engine and faceted filtering module for PrestaShop with soundex typo tolerance, flat MySQL FULLTEXT indexing, zero external SaaS fees, and merchant analytics.",
+        "offers": {
+          "@type": "Offer",
+          "price": "49.99",
+          "priceCurrency": "EUR",
+          "seller": { "@id": "https://tda-studio.com/#organization" }
+        }
+      },
+      {
+        "@type": "SoftwareApplication",
+        "@id": "https://tda-studio.com/#festiveflow",
+        "name": "FestiveFlow - Seasonal Marketing & Atmosphere Suite for PrestaShop",
+        "operatingSystem": "PrestaShop 1.7.0.0 - 9.x, PHP 7.4 - 8.2+",
+        "applicationCategory": "BusinessApplication, Marketing Automation",
+        "description": "All-in-one seasonal campaign and holiday atmosphere suite for PrestaShop featuring 60-144Hz HTML5 canvas particle celebration engine, interactive coupon gift box with 1-click copy, and synchronized countdown ribbon.",
+        "offers": {
+          "@type": "Offer",
+          "price": "29.99",
+          "priceCurrency": "EUR",
+          "seller": { "@id": "https://tda-studio.com/#organization" }
+        }
+      },
+      {
+        "@type": "ProfessionalService",
+        "@id": "https://tda-studio.com/#services",
+        "name": "TDA Custom E-Commerce & Full-Stack Engineering Services",
+        "provider": { "@id": "https://tda-studio.com/#organization" },
+        "serviceType": [
+          "Custom PrestaShop Module Development",
+          "PrestaShop Core Upgrades & Migrations",
+          "WooCommerce & WordPress Custom Systems",
+          "Laravel & Custom PHP Web Applications",
+          "E-Commerce Core Web Vitals & Speed Optimization"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <!-- Master Stylesheet Link -->
+  <style>
+/* =============================================================================
+   TDA ENGINEERING STUDIO — MASTER STYLESHEET
+   Typography: Bricolage Grotesque, Hanken Grotesk, DM Mono (from norra.html)
+   Palette: #FEF3E2 (Cream), #FAB12F (Sun Gold), #891818 (Deep Wine Red), #DD0303 (Crimson)
+============================================================================= */
+
+:root {
+  /* User-Specified Palette */
+  --bg: #FEF3E2;            /* Base Warm Cream Linen */
+  --bg-card: #FFFFFF;       /* Clean White Card Surface */
+  --bg-subtle: #F6EBD9;     /* Warm Tint */
+  --bg-dark: #1C150C;       /* Deep Umber Ink */
+  --bg-dark-card: #281F14;  /* Elevated Dark Card */
+  
+  --yellow: #FAB12F;        /* Warm Sun Gold */
+  --accent: #891818;        /* User Requested Deep Wine Red (#891818) */
+  --accent-hover: #6e1313;  /* Deep hover shade */
+  --accent-glow: rgba(137, 24, 24, 0.18);
+  --red: #DD0303;           /* Crimson Highlight */
+  
+  --ink: #1C150C;           /* Primary Text Ink */
+  --ink-muted: #5E4E3E;     /* Muted Secondary Text */
+  --ink-faint: #8E7D6C;     /* Faint Borders & Metadata */
+  --line: rgba(28, 21, 12, 0.12);
+  --line-strong: rgba(28, 21, 12, 0.22);
+
+  /* Fonts extracted from norra.html */
+  --f-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --f-body: "Hanken Grotesk", "Helvetica Neue", Arial, sans-serif;
+  --f-mono: "DM Mono", ui-monospace, Menlo, Consolas, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+}
+
+/* -----------------------------------------------------------------------------
+   BASE RESET & TYPOGRAPHY
+----------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--bg);
+  color: var(--ink);
+}
+
+body {
+  font-family: var(--f-body);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  background-color: var(--bg);
+  color: var(--ink);
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+img, svg {
+  display: block;
+  max-width: 100%;
+}
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--f-display);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  font-variation-settings: "wdth" 80;
+  text-wrap: balance;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 1260px;
+  margin-inline: auto;
+  padding-left: clamp(16px, 3.5vw, 32px);
+  padding-right: clamp(16px, 3.5vw, 32px);
+}
+
+.mono {
+  font-family: var(--f-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* -----------------------------------------------------------------------------
+   BUTTONS
+----------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 99px;
+  font-family: var(--f-body);
+  font-weight: 600;
+  font-size: 0.94rem;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), background 0.25s, box-shadow 0.25s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+.btn-sm {
+  padding: 7px 16px;
+  font-size: 0.84rem;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: #000;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #ffffff;
+}
+.btn-accent:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 6px 18px var(--accent-glow);
+}
+
+.btn-outline {
+  border: 1px solid var(--ink);
+  color: var(--ink);
+}
+.btn-outline:hover {
+  background: var(--ink);
+  color: var(--bg);
+}
+
+.btn-dark {
+  background: var(--bg-dark);
+  color: var(--bg);
+}
+.btn-dark:hover {
+  background: #000;
+}
+
+.btn-light {
+  background: var(--bg);
+  color: var(--ink);
+}
+.btn-light:hover {
+  background: #fff;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+}
+
+.btn-outline-light {
+  border: 1px solid rgba(254, 243, 226, 0.4);
+  color: var(--bg);
+}
+.btn-outline-light:hover {
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.w-100 {
+  width: 100%;
+}
+
+/* -----------------------------------------------------------------------------
+   SITE HEADER & LOGO
+----------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(254, 243, 226, 0.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.header-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  gap: 20px;
+}
+
+/* Logo image integration */
+.logo {
+  display: inline-flex;
+  align-items: center;
+}
+.site-logo-img {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+.site-logo-img-footer {
+  height: 38px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  filter: brightness(0.95);
+}
+
+/* Nav Links */
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.nav-link {
+  font-size: 0.94rem;
+  font-weight: 500;
+  color: var(--ink);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -4px;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.28s var(--ease);
+}
+.nav-link:hover::after, .nav-link.active::after {
+  transform: scaleX(1);
+}
+
+.header-action {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.mobile-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 6px;
+}
+.mobile-toggle span {
+  width: 22px;
+  height: 2px;
+  background: var(--ink);
+}
+
+.mobile-drawer {
+  display: none;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  padding: 16px 0;
+}
+.mobile-drawer.open {
+  display: block;
+}
+.mobile-drawer-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.mobile-nav-link {
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.mobile-email-box {
+  margin-top: 8px;
+}
+
+/* -----------------------------------------------------------------------------
+   SPA VIEW CONTAINER
+----------------------------------------------------------------------------- */
+.spa-view {
+  display: none;
+  opacity: 0;
+  animation: viewEnter 0.35s var(--ease) forwards;
+}
+.spa-view.active {
+  display: block;
+}
+@keyframes viewEnter {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------------------------------------------
+   HERO SECTION (Padding Top Reduced as requested)
+----------------------------------------------------------------------------- */
+.hero-section {
+  padding-block: clamp(20px, 2.5vw, 42px) clamp(36px, 5vw, 68px);
+}
+.hero-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+  gap: clamp(28px, 4.5vw, 56px);
+  align-items: center;
+}
+.meta-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--f-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  color: var(--ink-muted);
+  background: rgba(28, 21, 12, 0.06);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin-bottom: 18px;
+}
+.meta-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.hero-headline {
+  font-size: clamp(2.8rem, 6.2vw, 5.4rem);
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  margin-bottom: 20px;
+}
+.hero-headline em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero-headline span {
+  color: var(--red);
+}
+
+.hero-sub {
+  font-size: clamp(1.02rem, 1.6vw, 1.2rem);
+  line-height: 1.55;
+  color: var(--ink-muted);
+  max-width: 50ch;
+  margin-bottom: 30px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 38px;
+}
+
+.hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+.stat-num {
+  font-family: var(--f-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.stat-lbl {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+  margin-top: 4px;
+}
+.stat-sep {
+  width: 1px;
+  height: 26px;
+  background: var(--line);
+}
+
+/* -----------------------------------------------------------------------------
+   HERO INTERACTIVE WINDOW MOCKUPS
+----------------------------------------------------------------------------- */
+.hero-art {
+  position: relative;
+}
+.hero-mockup-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* Window frame */
+.win {
+  background: #FFFDEE;
+  color: var(--ink);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 44px -14px rgba(28, 21, 12, 0.14);
+  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+  display: block;
+}
+.win:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -14px rgba(28, 21, 12, 0.2);
+}
+.win-bar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 9px 13px;
+  background: rgba(28, 21, 12, 0.04);
+  border-bottom: 1px solid var(--line);
+}
+.win-bar i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+.win-bar span {
+  margin-left: 8px;
+  flex: 1;
+  background: #fff;
+  border-radius: 99px;
+  padding: 2px 10px;
+  color: var(--ink-muted);
+  font: 400 0.72rem var(--f-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.win-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Interactive Search in Hero */
+.hero-search-interactive-box {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  padding: 7px 12px;
+  border-radius: 8px;
+}
+.hero-search-input {
+  width: 100%;
+  font-family: var(--f-mono);
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink);
+}
+.hero-search-chips {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.72rem;
+  font-family: var(--f-mono);
+}
+.hero-chip-btn {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 2px 8px;
+  border-radius: 99px;
+  color: var(--ink-muted);
+  font-size: 0.7rem;
+}
+.hero-chip-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.win-result-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+.result-icon-cell {
+  width: 34px;
+  height: 34px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-subtle);
+  color: var(--accent);
+}
+.result-text-cell {
+  flex: 1;
+}
+.result-item-name {
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.result-item-meta {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  font-family: var(--f-mono);
+}
+.result-item-price {
+  font-family: var(--f-display);
+  font-weight: 700;
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+
+.win-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--line);
+  font-size: 0.74rem;
+  font-family: var(--f-mono);
+  color: var(--ink-muted);
+}
+.win-foot b {
+  color: var(--accent);
+}
+
+/* Festive Preview in Hero */
+.festive-preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.festive-badge {
+  font-weight: 600;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.festive-fps {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  background: rgba(250, 177, 47, 0.2);
+  color: #8c5600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 700;
+}
+.festive-coupon-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1px dashed var(--accent);
+  padding: 9px 12px;
+  border-radius: 8px;
+}
+.fcb-icon {
+  color: var(--accent);
+}
+.fcb-copy {
+  flex: 1;
+}
+.fcb-copy strong {
+  font-size: 0.82rem;
+  display: block;
+}
+.fcb-copy small {
+  font-size: 0.72rem;
+  color: var(--ink-muted);
+  font-family: var(--f-mono);
+}
+.fcb-btn {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------------------------
+   TICKER / VALUE BAR
+----------------------------------------------------------------------------- */
+.ticker-strip {
+  border-block: 1px solid var(--line);
+  background: var(--bg-subtle);
+  padding-block: 14px;
+}
+.ticker-wrap {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.ticker-item {
+  font-size: 0.86rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.ticker-item svg {
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------------------------
+   SECTIONS GENERAL
+----------------------------------------------------------------------------- */
+.section {
+  padding-block: clamp(56px, 8vw, 100px);
+}
+.section-top {
+  margin-bottom: clamp(28px, 4vw, 48px);
+}
+.section-title {
+  font-size: clamp(2.2rem, 4.5vw, 4rem);
+  margin-top: 6px;
+  margin-bottom: 12px;
+}
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--ink-muted);
+  max-width: 56ch;
+}
+
+/* -----------------------------------------------------------------------------
+   ABOUT US SECTION
+----------------------------------------------------------------------------- */
+.about-section {
+  border-bottom: 1px solid var(--line);
+}
+.about-grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: clamp(20px, 4vw, 48px);
+}
+.about-label {
+  padding-top: 8px;
+}
+.about-big {
+  font-size: clamp(1.9rem, 3.8vw, 3.2rem);
+  line-height: 1.05;
+  margin-bottom: 28px;
+}
+.about-big mark {
+  background: none;
+  color: var(--accent);
+}
+.about-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(20px, 3.5vw, 44px);
+  color: var(--ink-muted);
+  font-size: 1.02rem;
+}
+.about-columns p + p {
+  margin-top: 1em;
+}
+.about-columns strong {
+  color: var(--ink);
+}
+
+/* -----------------------------------------------------------------------------
+   HOMEPAGE INTERACTIVE SPEED & CATALOG BENCHMARK CALCULATOR
+----------------------------------------------------------------------------- */
+.benchmark-calculator-card {
+  background: #ffffff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(24px, 4vw, 40px);
+  margin-bottom: 48px;
+  box-shadow: 0 16px 36px -12px rgba(28, 21, 12, 0.08);
+}
+.bc-header {
+  margin-bottom: 24px;
+}
+.bc-header h3 {
+  font-size: clamp(1.6rem, 2.8vw, 2.3rem);
+  margin-top: 6px;
+}
+.bc-controls {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 32px;
+  align-items: center;
+}
+.bc-slider-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.bc-slider-label {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.bc-slider-label strong {
+  color: var(--accent);
+  font-family: var(--f-mono);
+}
+.bc-slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+.bc-metrics-display {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bc-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.88rem;
+}
+.bc-metric-row.highlight {
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------------------------
+   FLAGSHIP PRODUCTS PANELS
+----------------------------------------------------------------------------- */
+.products-overview {
+  background: var(--bg);
+}
+.product-panels-list {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px -14px rgba(28, 21, 12, 0.09);
+  transition: transform 0.28s var(--ease), box-shadow 0.28s;
+}
+.panel:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 24px 50px -14px rgba(28, 21, 12, 0.16);
+}
+
+.panel-art {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(20px, 3.5vw, 40px);
+  overflow: hidden;
+}
+.panel-search .panel-art {
+  background: linear-gradient(135deg, #FFF0DC 0%, #FCE0BC 100%);
+}
+.panel-festive .panel-art {
+  background: linear-gradient(135deg, #FDE6E6 0%, #FAC6C6 100%);
+}
+
+.panel-screenshot-card {
+  width: 100%;
+  max-width: 440px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(28, 21, 12, 0.15);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+.panel-img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.panel-watermark {
+  position: absolute;
+  bottom: -10%;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: var(--f-display);
+  font-size: clamp(5.5rem, 14vw, 12rem);
+  font-weight: 800;
+  letter-spacing: -0.06em;
+  color: rgba(28, 21, 12, 0.04);
+  pointer-events: none;
+  font-variation-settings: "wdth" 75;
+}
+
+.panel-info {
+  padding: clamp(24px, 3.8vw, 48px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 24px;
+}
+.panel-meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.pill {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: var(--bg-subtle);
+  border-radius: 4px;
+}
+.pill-accent {
+  font-family: var(--f-mono);
+  font-size: 0.72rem;
+  padding: 3px 8px;
+  background: rgba(137, 24, 24, 0.12);
+  color: var(--accent);
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.panel-name {
+  font-size: clamp(2.1rem, 3.6vw, 3rem);
+  margin-bottom: 4px;
+}
+.panel-ver {
+  font-family: var(--f-mono);
+  font-size: 0.92rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+.panel-tagline {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+.panel-summary {
+  font-size: 0.98rem;
+  line-height: 1.6;
+  color: var(--ink-muted);
+  margin-bottom: 18px;
+}
+
+.panel-highlights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  font-size: 0.9rem;
+  color: var(--ink);
+  margin-bottom: 22px;
+}
+.panel-highlights li {
+  position: relative;
+  padding-left: 18px;
+}
+.panel-highlights li::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.panel-action {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--line);
+  padding-top: 18px;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.panel-price span {
+  font-family: var(--f-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  display: block;
+  line-height: 1;
+  color: var(--accent);
+}
+.panel-price small {
+  font-size: 0.76rem;
+  color: var(--ink-muted);
+}
+
+/* -----------------------------------------------------------------------------
+   SERVICES SUMMARY
+----------------------------------------------------------------------------- */
+.services-summary {
+  background: var(--bg-subtle);
+  border-block: 1px solid var(--line);
+}
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 36px;
+}
+.service-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px 24px;
+}
+.sb-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.sb-num {
+  font-family: var(--f-mono);
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+.sb-icon {
+  color: var(--accent);
+}
+.service-box h3 {
+  font-size: 1.35rem;
+  margin-bottom: 10px;
+}
+.service-box p {
+  color: var(--ink-muted);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.services-bar {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 22px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.services-bar strong {
+  font-size: 1.1rem;
+  display: block;
+}
+.services-bar p {
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+}
+
+/* -----------------------------------------------------------------------------
+   WHY CHOOSE US SECTION
+----------------------------------------------------------------------------- */
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+.why-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px 20px;
+}
+.why-icon-wrap {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(137, 24, 24, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+.why-card h4 {
+  font-size: 1.18rem;
+  margin-bottom: 8px;
+}
+.why-card p {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  line-height: 1.55;
+}
+
+/* -----------------------------------------------------------------------------
+   CLOSING BAND
+----------------------------------------------------------------------------- */
+.closing-band {
+  background: var(--bg-dark);
+  color: var(--bg);
+  padding-block: clamp(64px, 9vw, 120px);
+}
+.closing-title {
+  font-size: clamp(2.6rem, 6vw, 5.8rem);
+  line-height: 0.98;
+  max-width: 16ch;
+  margin-bottom: clamp(24px, 3.5vw, 48px);
+}
+.closing-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba(254, 243, 226, 0.18);
+  padding-top: 28px;
+}
+.closing-bottom p {
+  max-width: 42ch;
+  color: rgba(254, 243, 226, 0.75);
+  font-size: 1.05rem;
+}
+.closing-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* -----------------------------------------------------------------------------
+   PRODUCT DETAIL PAGES
+----------------------------------------------------------------------------- */
+.product-page-hero {
+  padding-block: clamp(28px, 4vw, 52px) clamp(28px, 3.5vw, 48px);
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-subtle);
+}
+.crumb {
+  display: flex;
+  gap: 10px;
+  font-size: 0.82rem;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+.crumb .current {
+  color: var(--ink);
+  font-weight: 600;
+}
+.pp-title {
+  font-size: clamp(2.8rem, 5.5vw, 4.8rem);
+  margin-bottom: 10px;
+}
+.pp-ver {
+  font-family: var(--f-mono);
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+.pp-lead {
+  font-size: 1.2rem;
+  color: var(--ink-muted);
+  max-width: 58ch;
+  margin-bottom: 24px;
+}
+.pp-specs-strip {
+  display: flex;
+  gap: 16px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 12px 18px;
+  border-radius: 8px;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  font-size: 0.88rem;
+}
+.pp-hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 40px;
+  align-items: center;
+}
+@media (max-width: 992px) {
+  .pp-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+.pp-specs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 14px 18px;
+  border-radius: 10px;
+  margin-bottom: 28px;
+  font-size: 0.86rem;
+}
+@media (max-width: 580px) {
+  .pp-specs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.pp-specs-grid .spec-cell {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  line-height: 1.4;
+  color: var(--ink);
+}
+.pp-specs-grid .spec-cell svg {
+  flex-shrink: 0;
+  margin-top: 3px;
+  color: var(--accent);
+}
+.hero-video-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  box-shadow: 0 16px 36px rgba(28, 21, 12, 0.08);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.hero-video-card:hover {
+  box-shadow: 0 20px 44px rgba(28, 21, 12, 0.12);
+}
+.hero-video-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.video-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.2);
+}
+.video-label {
+  color: var(--ink);
+  font-family: var(--f-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+}
+.video-badge {
+  margin-left: auto;
+  font-size: 0.72rem;
+  background: #FEF3E2;
+  color: var(--accent);
+  border: 1px solid rgba(137, 24, 24, 0.2);
+  padding: 2px 8px;
+  border-radius: 99px;
+  font-weight: 600;
+}
+.hero-video-wrapper {
+  position: relative;
+  width: 100%;
+  background: #0d0a08;
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.hero-video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  outline: none;
+}
+.hero-video-footer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 16px;
+  background: #fff;
+  border-top: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+  line-height: 1.4;
+}
+.hero-video-footer svg {
+  flex-shrink: 0;
+  color: var(--accent);
+}
+.pp-actions-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* -----------------------------------------------------------------------------
+   ISOLATED PRODUCT SANDBOXES (On product pages only!)
+----------------------------------------------------------------------------- */
+.product-sandbox-section {
+  background: #fff;
+  border-bottom: 1px solid var(--line);
+}
+.sandbox-box {
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--bg);
+  padding: clamp(20px, 3.5vw, 36px);
+  box-shadow: 0 16px 36px rgba(28, 21, 12, 0.08);
+}
+.sandbox-header {
+  margin-bottom: 24px;
+}
+.sandbox-header h3 {
+  font-size: clamp(1.7rem, 2.8vw, 2.3rem);
+  margin-block: 6px 8px;
+}
+.sandbox-header p {
+  color: var(--ink-muted);
+  font-size: 0.98rem;
+}
+
+/* Search Simulator */
+.search-sim-console {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.search-bar-row {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+.sim-input-wrap {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: #fff;
+  border: 1.5px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 10px 14px;
+}
+.search-icon {
+  color: var(--accent);
+}
+.sim-input {
+  width: 100%;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.clear-btn {
+  font-size: 1.3rem;
+  color: var(--ink-muted);
+}
+.latency-badge {
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: var(--f-mono);
+  font-size: 0.82rem;
+  white-space: nowrap;
+}
+.latency-badge strong {
+  color: var(--accent);
+}
+
+.sample-pills {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.query-pill {
+  font-family: var(--f-mono);
+  font-size: 0.76rem;
+  padding: 3px 10px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 99px;
+  color: var(--ink-muted);
+}
+.query-pill:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+.typo-pill {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.sim-layout {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+  gap: 20px;
+}
+.sim-facets {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 16px;
+}
+.facet-title {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-family: var(--f-mono);
+  margin-bottom: 8px;
+}
+.facet-cb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.86rem;
+  color: var(--ink-muted);
+  margin-bottom: 7px;
+  cursor: pointer;
+}
+.facet-slider {
+  width: 100%;
+  accent-color: var(--accent);
+}
+
+.feed-topbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.86rem;
+  font-weight: 600;
+}
+.sim-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+  gap: 12px;
+}
+.sim-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+}
+.sim-card-icon-box {
+  width: 100%;
+  height: 80px;
+  background: var(--bg-subtle);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.sim-card-cat {
+  font-size: 0.68rem;
+  font-family: var(--f-mono);
+  color: var(--ink-muted);
+}
+.sim-card-title {
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-block: 4px;
+}
+.sim-card-sku {
+  font-size: 0.7rem;
+  color: var(--ink-muted);
+  font-family: var(--f-mono);
+  margin-bottom: 8px;
+}
+.sim-card-foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.sim-card-price {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--accent);
+}
+
+/* -----------------------------------------------------------------------------
+   FESTIVEFLOW LOCAL STAGE & FIXED SKY MASCOT
+----------------------------------------------------------------------------- */
+.festive-sim-console {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.festive-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.preset-pill-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.preset-pill {
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 99px;
+  background: #fff;
+  border: 1px solid var(--line);
+  color: var(--ink-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.preset-pill.active {
+  background: var(--ink);
+  color: var(--bg);
+  border-color: var(--ink);
+}
+
+.festive-local-stage {
+  height: 360px;
+  border-radius: 12px;
+  background: #1C150C;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--line);
+}
+.local-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.stage-info-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 24px;
+  color: var(--bg);
+  z-index: 2;
+  background: radial-gradient(circle, rgba(28, 21, 12, 0.45) 0%, rgba(28, 21, 12, 0.85) 100%);
+}
+.stage-info-overlay h4 {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  color: #fff;
+  margin-bottom: 8px;
+}
+.stage-info-overlay p {
+  color: rgba(254, 243, 226, 0.8);
+  font-size: 0.98rem;
+  max-width: 44ch;
+  margin-bottom: 18px;
+}
+
+/* -----------------------------------------------------------------------------
+   SCREENSHOTS GRID
+----------------------------------------------------------------------------- */
+.screenshots-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+.ss-item {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease);
+}
+.ss-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(28, 21, 12, 0.12);
+}
+.ss-item img {
+  width: 100%;
+  height: 195px;
+  object-fit: cover;
+}
+.ss-item figcaption {
+  padding: 10px 12px;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  border-top: 1px solid var(--line);
+}
+
+/* Order Callout Box */
+.order-box {
+  background: var(--bg-dark);
+  color: var(--bg);
+  border-radius: 14px;
+  padding: clamp(28px, 4.5vw, 48px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+.order-box h3 {
+  font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+  color: #fff;
+  margin-bottom: 6px;
+}
+.order-box p {
+  color: rgba(254, 243, 226, 0.75);
+  font-size: 0.98rem;
+}
+.order-cta-side {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.order-price {
+  font-family: var(--f-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  color: var(--yellow);
+}
+
+/* -----------------------------------------------------------------------------
+   SERVICES & ABOUT & CONTACT PAGES
+----------------------------------------------------------------------------- */
+.services-full-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+.sfi-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 28px;
+}
+.sfi-card h3 {
+  font-size: 1.55rem;
+  margin-bottom: 8px;
+}
+.sfi-card p {
+  color: var(--ink-muted);
+  margin-bottom: 12px;
+  font-size: 0.98rem;
+}
+.sfi-meta {
+  font-family: var(--f-mono);
+  font-size: 0.76rem;
+  color: var(--accent);
+}
+
+.about-story-layout {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 40px;
+  margin-top: clamp(32px, 4.5vw, 56px);
+}
+.story-text h3 {
+  font-size: 1.7rem;
+  margin: 24px 0 10px;
+}
+.story-text h3:first-child { margin-top: 0; }
+.story-text p {
+  color: var(--ink-muted);
+  font-size: 1.02rem;
+  margin-bottom: 14px;
+}
+.story-principles {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.principle-box {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 22px;
+}
+.principle-box h4 {
+  font-size: 1.2rem;
+  margin: 6px 0 6px;
+}
+.principle-box p {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 36px;
+}
+.contact-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 32px;
+}
+.contact-card h3 {
+  font-size: 1.75rem;
+  margin-bottom: 6px;
+}
+.contact-card p {
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+.clean-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.form-row label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+.form-input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--line-strong);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 0.94rem;
+  color: var(--ink);
+}
+.form-input:focus {
+  border-color: var(--accent);
+  background: #fff;
+}
+.form-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 6px;
+  flex-wrap: wrap;
+}
+
+.contact-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.info-tile {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 24px;
+}
+.direct-email-link {
+  font-family: var(--f-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  margin: 6px 0 10px;
+}
+.info-tile p {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+.info-tile h4 {
+  font-size: 1.2rem;
+  margin: 6px 0 6px;
+}
+
+/* -----------------------------------------------------------------------------
+   MODALS & LIGHTBOX
+----------------------------------------------------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(28, 21, 12, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 200;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+.modal-backdrop.open {
+  display: flex;
+}
+.modal-dialog {
+  background: #fff;
+  border-radius: 14px;
+  padding: 32px;
+  max-width: 480px;
+  width: 100%;
+  position: relative;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+}
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  font-size: 1.5rem;
+  line-height: 1;
+  color: var(--ink-muted);
+}
+.modal-body h3 {
+  font-size: 1.55rem;
+  margin-block: 6px 8px;
+}
+.pm-price {
+  font-family: var(--f-display);
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 10px;
+}
+.pm-note {
+  font-size: 0.88rem;
+  color: var(--ink-muted);
+  margin-bottom: 20px;
+}
+.modal-actions-col {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pm-secure {
+  display: block;
+  font-size: 0.74rem;
+  color: var(--ink-muted);
+  text-align: center;
+  margin-top: 12px;
+}
+
+.coupon-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg);
+  border: 1px dashed var(--accent);
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-block: 14px;
+}
+.coupon-code {
+  font-family: var(--f-mono);
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: var(--accent);
+}
+
+.lightbox-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 300;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.lightbox-backdrop.open { display: flex; }
+.lightbox-close {
+  position: absolute;
+  top: 18px;
+  right: 22px;
+  font-size: 2rem;
+  color: #fff;
+}
+.lightbox-content {
+  max-width: 90vw;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lightbox-content img {
+  max-height: 80vh;
+  object-fit: contain;
+  border-radius: 8px;
+}
+.lightbox-caption {
+  color: #fff;
+  margin-top: 10px;
+  font-size: 0.88rem;
+}
+
+/* Toast & Success Banner */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  left: 24px;
+  z-index: 400;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-width: calc(100vw - 48px);
+}
+.toast {
+  background: var(--bg-dark);
+  color: var(--bg);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  border-left: 4px solid var(--accent);
+  max-width: 480px;
+  animation: toastIn 0.2s ease;
+}
+.toast.toast-success {
+  border-left-color: #2e7d32;
+  background: #15241b;
+  color: #e8f5e9;
+}
+.toast-body {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  line-height: 1.4;
+}
+.toast-close {
+  background: transparent;
+  border: none;
+  color: inherit;
+  opacity: 0.7;
+  cursor: pointer;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 2px 6px;
+  border-radius: 4px;
+  transition: opacity 0.2s, background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toast-close:hover {
+  opacity: 1;
+  background: rgba(255, 255, 255, 0.15);
+}
+.form-success-banner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  background: #eef7ee;
+  border: 1.5px solid #2e7d32;
+  border-radius: 10px;
+  padding: 18px 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 4px 16px rgba(46, 125, 50, 0.1);
+  animation: toastIn 0.25s ease;
+}
+.success-banner-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+}
+.success-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #2e7d32;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.success-title {
+  font-size: 1.05rem;
+  color: #1b5e20;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+.success-desc {
+  font-size: 0.88rem;
+  color: #2e4a30;
+  margin: 0;
+  line-height: 1.45;
+}
+.success-dismiss-btn {
+  flex-shrink: 0;
+  padding: 6px 12px;
+  font-size: 0.8rem;
+  background: #fff;
+  border: 1px solid #2e7d32;
+  color: #2e7d32;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+.success-dismiss-btn:hover {
+  background: #2e7d32;
+  color: #fff;
+}
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* -----------------------------------------------------------------------------
+   FOOTER
+----------------------------------------------------------------------------- */
+.site-footer {
+  background: var(--bg-subtle);
+  border-top: 1px solid var(--line);
+  padding-top: 56px;
+}
+.footer-wrap {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 36px;
+  padding-bottom: 42px;
+}
+.footer-tagline {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+  margin-block: 10px 14px;
+  max-width: 32ch;
+}
+.footer-email-link a {
+  font-family: var(--f-display);
+  font-weight: 700;
+  color: var(--accent);
+}
+.footer-nav-col {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.footer-nav-col a {
+  font-size: 0.9rem;
+  color: var(--ink-muted);
+}
+.footer-nav-col a:hover {
+  color: var(--ink);
+}
+.footer-badge {
+  font-family: var(--f-mono);
+  font-size: 0.74rem;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 4px 8px;
+  border-radius: 4px;
+  width: fit-content;
+}
+
+.sub-footer {
+  border-top: 1px solid var(--line);
+  padding-block: 18px;
+  font-size: 0.8rem;
+  color: var(--ink-muted);
+}
+.sub-footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.sub-footer-wrap a { color: var(--ink); font-weight: 600; }
+
+/* -----------------------------------------------------------------------------
+   RESPONSIVE (Mobile & Tablet)
+----------------------------------------------------------------------------- */
+@media (max-width: 960px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .panel { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-wrap { grid-template-columns: 1fr 1fr; }
+  .screenshots-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-story-layout, .contact-layout { grid-template-columns: 1fr; }
+  .sim-layout { grid-template-columns: 1fr; }
+  .bc-controls { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 760px) {
+  .nav-links { display: none; }
+  .mobile-toggle { display: flex; }
+  .about-columns { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .screenshots-grid { grid-template-columns: 1fr; }
+  .footer-wrap { grid-template-columns: 1fr; }
+  .form-grid-2 { grid-template-columns: 1fr; }
+  .order-box { flex-direction: column; align-items: flex-start; }
+  .search-bar-row { flex-direction: column; align-items: stretch; }
+  .hero-stats { flex-wrap: wrap; }
+}
+
+</style>
+</head>
+<body>
+
+  <!-- Sticky Clean Navigation Header -->
+  <header class="site-header" id="site-header">
+    <div class="wrap header-wrap">
+      <a href="#/" class="logo" aria-label="TDA Engineering Studio">
+        <img src="/assets/images/logo-tda.png" alt="TDA Engineering Studio" class="site-logo-img">
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-links" aria-label="Main Navigation">
+        <a href="#/" class="nav-link" data-route="home">Home</a>
+        <a href="#/products/perfectsearch" class="nav-link" data-route="perfectsearch">PerfectSearch™</a>
+        <a href="#/products/festiveflow" class="nav-link" data-route="festiveflow">FestiveFlow™</a>
+        <a href="#/services" class="nav-link" data-route="services">Services</a>
+        <a href="#/about" class="nav-link" data-route="about">Our Story</a>
+        <a href="#/contact" class="nav-link" data-route="contact">Contact</a>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="header-action">
+        <a href="#/contact" class="btn btn-sm btn-accent">
+          <span>Inquire / Work With Us</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <button type="button" class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer" id="mobile-drawer">
+      <div class="wrap mobile-drawer-inner">
+        <a href="#/" class="mobile-nav-link" data-route="home">Home</a>
+        <a href="#/products/perfectsearch" class="mobile-nav-link" data-route="perfectsearch">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          PerfectSearch™ Live Search
+        </a>
+        <a href="#/products/festiveflow" class="mobile-nav-link" data-route="festiveflow">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+          FestiveFlow™ Seasonal Suite
+        </a>
+        <a href="#/services" class="mobile-nav-link" data-route="services">Engineering Services</a>
+        <a href="#/about" class="mobile-nav-link" data-route="about">Our Story &amp; Direct Model</a>
+        <a href="#/contact" class="mobile-nav-link" data-route="contact">Contact Us</a>
+        <div class="mobile-email-box">
+          <a href="mailto:tdawebservices@gmail.com" class="btn btn-sm btn-dark w-100">Email tdawebservices@gmail.com</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================================= -->
+  <!-- MAIN SPA CONTENT ROUTER                                                   -->
+  <!-- ========================================================================= -->
+  <main id="spa-root">
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 1: CLEAN EDITORIAL HOMEPAGE                                        -->
+    <!-- ======================================================================= -->
+    <section id="view-home" class="spa-view active">
+
+      <!-- HERO SECTION (Padding Top Reduced) -->
+      <section class="hero-section">
+        <div class="wrap hero-grid">
+          <div class="hero-content">
+            <div class="meta-tag">
+              <span class="meta-dot"></span>
+              <span>BOUTIQUE STUDIO • 3 SENIOR DEVELOPERS • DIRECT PARTNERSHIP</span>
+            </div>
+
+            <h1 class="hero-headline">
+              High-Performance <br/>
+              <em>PrestaShop Modules</em> &amp; <br/>
+              <span>Bespoke Engineering.</span>
+            </h1>
+
+            <p class="hero-sub">
+              We engineer sub-50ms live search engines, seasonal marketing suites, and custom e-commerce systems. 
+              No agency account managers, no inflated commissions — you work directly with the developers who write every line of code.
+            </p>
+
+            <div class="hero-buttons">
+              <a href="#products-overview" class="btn btn-primary">
+                <span>Explore Our Modules</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#/services" class="btn btn-outline">
+                <span>Custom Engineering Services</span>
+              </a>
+            </div>
+
+            <div class="hero-stats">
+              <div class="stat-item">
+                <span class="stat-num">&lt; 50ms</span>
+                <span class="stat-lbl">Live Search Latency</span>
+              </div>
+              <div class="stat-sep"></div>
+              <div class="stat-item">
+                <span class="stat-num">PS 1.7 - 9.x</span>
+                <span class="stat-lbl">Dual Compatibility</span>
+              </div>
+              <div class="stat-sep"></div>
+              <div class="stat-item">
+                <span class="stat-num">100% Direct</span>
+                <span class="stat-lbl">Author Code &amp; Support</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Dual Visual Cards (With Interactive Hero Search Simulation) -->
+          <div class="hero-art">
+            <div class="hero-mockup-stack">
+              <!-- Window 1: PerfectSearch Interactive Simulation -->
+              <div class="win win-preview win-search">
+                <div class="win-bar">
+                  <i></i><i></i><i></i>
+                  <span>prestashop/modules/perfectsearch — Live Instant Autocomplete</span>
+                </div>
+                <div class="win-body">
+                  <div class="hero-search-interactive-box">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="color:var(--accent); flex-shrink:0;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+                    <input type="text" id="hero-search-input" class="hero-search-input" value="waterproof" placeholder="Type here (e.g. leather, running, hoodie)...">
+                    <span class="win-latency-badge" id="hero-search-latency">36ms</span>
+                  </div>
+                  <div class="hero-search-chips">
+                    <span style="color:var(--ink-muted);">Try:</span>
+                    <button type="button" class="hero-chip-btn" data-chip="waterproof">waterproof</button>
+                    <button type="button" class="hero-chip-btn" data-chip="leather">leather</button>
+                    <button type="button" class="hero-chip-btn" data-chip="running">running</button>
+                    <button type="button" class="hero-chip-btn" data-chip="hoodie">hoodie</button>
+                  </div>
+                  <div class="win-result-row">
+                    <div class="result-icon-cell">
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 14-5-3-3 2-4-2-4 3v5h16v-5z"/><path d="M14 11V7l-4-2-5 3"/></svg>
+                    </div>
+                    <div class="result-text-cell">
+                      <div class="result-item-name" id="hero-result-name">Air Trail Pro Waterproof Sneaker</div>
+                      <div class="result-item-meta" id="hero-result-meta">SKU: TR-994 • Tax Incl. • In Stock</div>
+                    </div>
+                    <div class="result-item-price" id="hero-result-price">129,00 €</div>
+                  </div>
+                  <div class="win-foot">
+                    <span>Flat MySQL FULLTEXT Index</span>
+                    <a href="#/products/perfectsearch" style="color:var(--accent); font-weight:bold;">View Live Testbed &rarr;</a>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Window 2: FestiveFlow -->
+              <a href="#/products/festiveflow" class="win win-preview win-festive" title="View FestiveFlow Module">
+                <div class="win-bar">
+                  <i></i><i></i><i></i>
+                  <span>prestashop/modules/festiveflow — Seasonal Campaign Suite</span>
+                </div>
+                <div class="win-body">
+                  <div class="festive-preview-row">
+                    <div class="festive-badge">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--accent);"><path d="M20 12v10H4V12"/><path d="M2 7h20v5H2z"/><path d="M12 22V7"/><path d="M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7z"/><path d="M12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"/></svg>
+                      Christmas, Black Friday &amp; Seasonal Presets
+                    </div>
+                    <div class="festive-fps">144 FPS Canvas</div>
+                  </div>
+                  <div class="festive-coupon-bar">
+                    <div class="fcb-icon">
+                      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+                    </div>
+                    <div class="fcb-copy">
+                      <strong>Holiday Voucher Unlocked!</strong>
+                      <small>CODE: <strong>TDAFESTIVE30</strong> (One-Click Copy)</small>
+                    </div>
+                    <span class="fcb-btn">View Module &rarr;</span>
+                  </div>
+                  <div class="win-foot">
+                    <span>5 Ready Seasonal Themes</span>
+                    <b>Zero Checkout Disruption &rarr;</b>
+                  </div>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TICKER / VALUE BAR (Clean SVGs, No Emojis) -->
+      <div class="ticker-strip">
+        <div class="wrap ticker-wrap">
+          <div class="ticker-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+            Sub-50ms Flat Database Indexing
+          </div>
+          <div class="ticker-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>
+            Metaphone Soundex Typo Tolerance
+          </div>
+          <div class="ticker-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+            60-144 FPS HTML5 Canvas Physics
+          </div>
+          <div class="ticker-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
+            Direct Collaboration with 3 Senior Developers
+          </div>
+          <div class="ticker-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg>
+            Zero Monthly SaaS Recurring Fees
+          </div>
+        </div>
+      </div>
+
+      <!-- ABOUT US & DIRECT CLIENT MODEL -->
+      <section class="section about-section" id="about-us">
+        <div class="wrap">
+          <div class="about-grid">
+            <div class="about-label">
+              <span class="mono">ABOUT OUR TEAM</span>
+            </div>
+            <div class="about-content">
+              <h2 class="about-big">
+                We are 3 colleague developers who build high-grade software and <mark>partner directly with store owners</mark>.
+              </h2>
+              <div class="about-columns">
+                <div>
+                  <p>
+                    We work together as senior software engineers. In our day-to-day engineering on large e-commerce platforms, 
+                    we constantly ran into the same problems: search modules that dragged down database performance, bloated plugins 
+                    that broke checkout funnels, and exorbitant monthly SaaS fees (80 € – 250 € / month) for simple features.
+                  </p>
+                  <p>
+                    We built <strong>PerfectSearch</strong> and <strong>FestiveFlow</strong> to solve these challenges natively, cleanly, 
+                    and self-hosted without recurring subscriptions.
+                  </p>
+                </div>
+                <div>
+                  <p>
+                    <strong>Why are we reaching out directly?</strong> Traditional marketplaces like PrestaShop Addons and CodeCanyon 
+                    present significant obstacles for independent developers—including arbitrary Indian payment processing restrictions (such as Stripe India limits) 
+                    and opaque, generic rejections.
+                  </p>
+                  <p>
+                    By connecting directly with merchants, we eliminate the 40% marketplace commissions, pass the savings directly to you, 
+                    and provide <strong>1-on-1 author installation, free theme adaptation, and lifetime updates</strong>.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- HOMEPAGE INTERACTIVE SPEED & CATALOG BENCHMARK CALCULATOR -->
+      <section class="section" id="benchmark" style="background: var(--bg-subtle); border-bottom: 1px solid var(--line);">
+        <div class="wrap">
+          <div class="benchmark-calculator-card">
+            <div class="bc-header">
+              <span class="mono" style="color:var(--accent);">INTERACTIVE CATALOG BENCHMARK</span>
+              <h3>Calculate Search Speedup &amp; SaaS Savings</h3>
+              <p style="color:var(--ink-muted); margin-top:4px;">Drag the slider to see how PerfectSearch performs against core PrestaShop queries and third-party SaaS tools as your catalog scales.</p>
+            </div>
+            <div class="bc-controls">
+              <div class="bc-slider-group">
+                <div class="bc-slider-label">
+                  <span>Store Catalog Size:</span>
+                  <strong id="bc-sku-count">15,000 SKUs</strong>
+                </div>
+                <input type="range" id="bc-sku-slider" min="2000" max="50000" step="1000" value="15000" class="bc-slider">
+                <small style="color:var(--ink-faint);">Slide between 2,000 and 50,000 products</small>
+              </div>
+
+              <div class="bc-metrics-display">
+                <div class="bc-metric-row">
+                  <span>Default Core Search Latency:</span>
+                  <span id="bc-core-latency" style="color:var(--red); font-weight:600;">~420ms (Slow joins)</span>
+                </div>
+                <div class="bc-metric-row">
+                  <span>Third-Party SaaS Cost:</span>
+                  <span style="color:var(--ink-muted); font-weight:600;">~150 € / month</span>
+                </div>
+                <div class="bc-metric-row highlight">
+                  <span>PerfectSearch Latency:</span>
+                  <span id="bc-ps-latency" style="font-size:1.15rem; font-family:var(--f-display);">32ms</span>
+                </div>
+                <div class="bc-metric-row highlight" style="border:none; padding-top:0;">
+                  <span>Annual Subscription Savings:</span>
+                  <span id="bc-saas-savings" style="font-size:1.05rem; font-family:var(--f-mono);">~1.800 € / year saved</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- FLAGSHIP MODULES SHOWCASE -->
+      <section class="section products-overview" id="products-overview">
+        <div class="wrap">
+          <div class="section-top">
+            <div class="mono">OUR FLAGSHIP PRODUCTS</div>
+            <h2 class="section-title">Two Focused PrestaShop Suites.</h2>
+            <p class="section-desc">Each module solves a critical e-commerce need with clean architecture and zero SaaS dependencies.</p>
+          </div>
+
+          <div class="product-panels-list">
+            
+            <!-- PANEL 1: PERFECTSEARCH -->
+            <article class="panel panel-search">
+              <div class="panel-art">
+                <div class="panel-screenshot-card">
+                  <img src="/assets/images/perfectsearch/01_instant_search_modal.png" alt="PerfectSearch Instant Live Search Modal" class="panel-img">
+                </div>
+                <div class="panel-watermark">SEARCH</div>
+              </div>
+              <div class="panel-info">
+                <div>
+                  <div class="panel-meta">
+                    <span class="pill">PRESTASHOP 1.7 - 9.X</span>
+                    <span class="pill">PHP 7.4 - 8.3</span>
+                    <span class="pill-accent">FLAT MYSQL INDEX</span>
+                  </div>
+                  <h3 class="panel-name">PerfectSearch™ <span class="panel-ver">v1.1.0</span></h3>
+                  <p class="panel-tagline">The Sub-50ms Fast AJAX Live Search &amp; Merchant Intelligence Engine</p>
+                  <p class="panel-summary">
+                    Replaces sluggish core searches with an instant, dedicated flat-index FULLTEXT search table. 
+                    Includes Metaphone soundex typo tolerance, live price/stock rendering, search analytics to spot catalog gaps, 
+                    and B2B customer price privacy controls.
+                  </p>
+                  <ul class="panel-highlights">
+                    <li>Sub-50ms instant autocomplete bypassing slow multi-table joins</li>
+                    <li>Phonetic typo tolerance (e.g. "womne shoes" auto-resolves)</li>
+                    <li>Search analytics dashboard logging hits &amp; zero-result queries</li>
+                    <li>0 € / month forever — 100% self-hosted on your MySQL database</li>
+                  </ul>
+                </div>
+                <div class="panel-action">
+                  <div class="panel-price">
+                    <span>49,99 € <small>Euro</small></span>
+                    <small>One-time license • Free installation</small>
+                  </div>
+                  <a href="#/products/perfectsearch" class="btn btn-primary">
+                    <span>Explore Module &amp; Test Live Demo &rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- PANEL 2: FESTIVEFLOW -->
+            <article class="panel panel-festive">
+              <div class="panel-art">
+                <div class="panel-screenshot-card">
+                  <img src="/assets/images/festiveflow/01-storefront-christmas-hero.png" alt="FestiveFlow Christmas Atmosphere Storefront" class="panel-img">
+                </div>
+                <div class="panel-watermark">FESTIVE</div>
+              </div>
+              <div class="panel-info">
+                <div>
+                  <div class="panel-meta">
+                    <span class="pill">PRESTASHOP 1.7 - 9.X</span>
+                    <span class="pill">60-144 FPS DELTA-TIME</span>
+                    <span class="pill-accent">MARKETING SUITE</span>
+                  </div>
+                  <h3 class="panel-name">FestiveFlow™ <span class="panel-ver">v1.0.0</span></h3>
+                  <p class="panel-tagline">Seasonal Marketing, Holiday Atmosphere &amp; Coupon Suite</p>
+                  <p class="panel-summary">
+                    Turn seasonal holidays into recurring revenue spikes. Delivers a complete holiday atmosphere with 
+                    hardware-accelerated celebration particle canvas, a floating coupon gift box that shoppers love to click, 
+                    a synchronized countdown ribbon, and browser-compliant ambient audio.
+                  </p>
+                  <ul class="panel-highlights">
+                    <li>5 ready holiday presets: Christmas, Halloween, Black Friday, Valentine, New Year</li>
+                    <li>Interactive coupon gift box with 1-click copy &amp; native Cart Rule sync</li>
+                    <li>Synchronized server countdown ribbon with auto-expiration</li>
+                    <li>Guaranteed zero checkout disruption (auto-pauses on Cart &amp; Checkout)</li>
+                  </ul>
+                </div>
+                <div class="panel-action">
+                  <div class="panel-price">
+                    <span>29,99 € <small>Euro</small></span>
+                    <small>One-time license • Free installation</small>
+                  </div>
+                  <a href="#/products/festiveflow" class="btn btn-primary">
+                    <span>Explore Module &amp; Test Live Demo &rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+          </div>
+        </div>
+      </section>
+
+      <!-- CUSTOM ENGINEERING SERVICES -->
+      <section class="section services-summary" id="services">
+        <div class="wrap">
+          <div class="section-top">
+            <div class="mono">BESPOKE CLIENT ENGINEERING</div>
+            <h2 class="section-title">Beyond Modules: We Build Custom E-Commerce Solutions.</h2>
+            <p class="section-desc">
+              Need custom modifications, platform upgrades, or a high-performance web app? 
+              Work directly with our 3-developer team across PrestaShop, WordPress/WooCommerce, Laravel, and PHP.
+            </p>
+          </div>
+
+          <div class="services-grid">
+            <div class="service-box">
+              <div class="sb-header">
+                <span class="sb-num">01</span>
+                <span class="sb-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/></svg>
+                </span>
+              </div>
+              <h3>PrestaShop Upgrades &amp; Custom Modules</h3>
+              <p>
+                Bespoke module development, third-party ERP/CRM sync, custom checkout funnels, and risk-free version upgrades (PrestaShop 1.7 &rarr; 8.x / 9.x) with zero data loss.
+              </p>
+            </div>
+
+            <div class="service-box">
+              <div class="sb-header">
+                <span class="sb-num">02</span>
+                <span class="sb-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+                </span>
+              </div>
+              <h3>WooCommerce &amp; WordPress Systems</h3>
+              <p>
+                Tailored plugins, payment gateway integrations, high-converting checkout flows, and database speed tuning for fast-growing WordPress stores.
+              </p>
+            </div>
+
+            <div class="service-box">
+              <div class="sb-header">
+                <span class="sb-num">03</span>
+                <span class="sb-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>
+                </span>
+              </div>
+              <h3>Laravel &amp; Custom PHP Backends</h3>
+              <p>
+                Custom internal tools, customer portals, multi-tenant SaaS architectures, and high-throughput RESTful / GraphQL microservices built on modern PHP 8.x and Laravel.
+              </p>
+            </div>
+
+            <div class="service-box">
+              <div class="sb-header">
+                <span class="sb-num">04</span>
+                <span class="sb-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                </span>
+              </div>
+              <h3>Core Web Vitals &amp; Speed Audits</h3>
+              <p>
+                Database profiling, slow MySQL query refactoring, Redis/OPcache caching, asset optimization, and Core Web Vitals optimization to achieve sub-second page loads.
+              </p>
+            </div>
+          </div>
+
+          <div class="services-bar">
+            <div>
+              <strong>Interested in custom development or a free store audit?</strong>
+              <p>We review your store and provide an actionable technical recommendation within 4 hours.</p>
+            </div>
+            <a href="#/contact" class="btn btn-dark">Get in Touch With Us &rarr;</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- WHY WORK WITH US (Clean SVG Icons) -->
+      <section class="section why-section">
+        <div class="wrap">
+          <div class="section-top">
+            <div class="mono">OUR STANDARDS</div>
+            <h2 class="section-title">Why Partner Directly With TDA?</h2>
+          </div>
+
+          <div class="why-grid">
+            <div class="why-card">
+              <div class="why-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 18l6-6-6-6"/><path d="M8 6l-6 6 6 6"/></svg>
+              </div>
+              <h4>Direct Developer Contact</h4>
+              <p>You speak directly with the senior engineers who write the code. No middleman account managers or junior ticket queues.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+              </div>
+              <h4>Free Theme Installation</h4>
+              <p>Every module purchase includes complimentary theme setup and CSS adaptation by the authors so it looks native to your storefront.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+              </div>
+              <h4>Fair, Honest Pricing</h4>
+              <p>No inflated marketplace markups or recurring SaaS subscriptions. You pay once for perpetual licenses and transparent custom dev rates.</p>
+            </div>
+            <div class="why-card">
+              <div class="why-icon-wrap">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <h4>Production-Tested Code</h4>
+              <p>Strict coding standards, adherence to PrestaShop hooks, zero checkout disruption, and verified compatibility across modern PHP versions.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- CLOSING BAND -->
+      <section class="closing-band">
+        <div class="wrap closing-wrap">
+          <h2 class="closing-title">
+            Ready to upgrade your store's speed &amp; conversions?
+          </h2>
+          <div class="closing-bottom">
+            <p>
+              Whether you want to license <strong>PerfectSearch</strong>, deploy <strong>FestiveFlow</strong>, or hire us for bespoke development, reach out directly.
+            </p>
+            <div class="closing-actions">
+              <a href="mailto:tdawebservices@gmail.com" class="btn btn-light">
+                <span>Email tdawebservices@gmail.com</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </a>
+              <a href="#/contact" class="btn btn-outline-light">Contact Form &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 2: DEDICATED PRODUCT PAGE — PERFECTSEARCH™                         -->
+    <!-- ======================================================================= -->
+    <section id="view-perfectsearch" class="spa-view">
+      <div class="product-page-hero">
+        <div class="wrap">
+          <div class="crumb">
+            <a href="#/">Home</a> <span>/</span> <span>Modules</span> <span>/</span> <span class="current">PerfectSearch™</span>
+          </div>
+
+          <div class="pp-head">
+            <div class="meta-tag">
+              <span class="meta-dot"></span>
+              <span>PRESTASHOP 1.7 - 9.X • PHP 7.4 - 8.3 • COMMERCIAL MODULE</span>
+            </div>
+            <h1 class="pp-title">PerfectSearch™ <span class="pp-ver">v1.1.0</span></h1>
+            <p class="pp-lead">
+              Standalone Fast AJAX Live Search, Dynamic Facets &amp; Merchant Intelligence. 
+              Delivers sub-50ms instant results using an optimized flat MySQL FULLTEXT index with Metaphone soundex typo tolerance.
+            </p>
+            
+            <div class="pp-specs-strip">
+              <div class="spec-cell"><strong>Latency:</strong> &lt; 50ms Flat Index</div>
+              <div class="spec-cell"><strong>Typo Tolerance:</strong> Soundex Metaphone</div>
+              <div class="spec-cell"><strong>SaaS Fees:</strong> 0 € / Month (100% Self-Hosted)</div>
+              <div class="spec-cell"><strong>Support:</strong> 1-on-1 Author Installation</div>
+            </div>
+
+            <div class="pp-actions-row">
+              <button type="button" class="btn btn-primary open-buy-modal" data-product="perfectsearch" data-price="49,99 €">
+                <span>Acquire License — 49,99 € (One-Time)</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+              </button>
+              <a href="mailto:tdawebservices@gmail.com?subject=PerfectSearch%20Inquiry" class="btn btn-outline">
+                Inquire via Email
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE SEARCH SANDBOX -->
+      <section class="section product-sandbox-section">
+        <div class="wrap">
+          <div class="sandbox-box">
+            <div class="sandbox-header">
+              <div class="mono" style="color:var(--accent);">LIVE INTERACTIVE TESTBED</div>
+              <h3>Test Drive PerfectSearch Speed &amp; Typo Tolerance</h3>
+              <p>Type queries below to test live autocomplete, simulated database latency, and automatic phonetic typo tolerance.</p>
+            </div>
+
+            <div class="search-sim-console">
+              <div class="search-bar-row">
+                <div class="sim-input-wrap">
+                  <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+                  <input type="text" id="sim-search-input" class="sim-input" placeholder="Type here (e.g. 'jacket', 'sneakers', 'hoodie', or deliberate typo 'womne')..." value="hoodie">
+                  <button type="button" class="clear-btn" id="sim-search-clear">&times;</button>
+                </div>
+                <div class="latency-badge" id="sim-speed-indicator">
+                  ⚡ Latency: <strong>32ms</strong>
+                </div>
+              </div>
+
+              <!-- Query Pills -->
+              <div class="sample-pills">
+                <span class="mono">Try sample queries:</span>
+                <button type="button" class="query-pill" data-query="jacket">jacket</button>
+                <button type="button" class="query-pill" data-query="sneakers">sneakers</button>
+                <button type="button" class="query-pill typo-pill" data-query="womne shoes">womne shoes (Typo test!)</button>
+                <button type="button" class="query-pill" data-query="leather">leather</button>
+                <button type="button" class="query-pill" data-query="watch">watch</button>
+                <button type="button" class="query-pill" data-query="backpack">backpack</button>
+              </div>
+
+              <div class="sim-layout">
+                <!-- Facets -->
+                <div class="sim-facets">
+                  <div class="facet-title">Category Facets</div>
+                  <label class="facet-cb"><input type="checkbox" name="cat" value="all" checked> All Categories</label>
+                  <label class="facet-cb"><input type="checkbox" name="cat" value="Apparel"> Apparel &amp; Hoodies</label>
+                  <label class="facet-cb"><input type="checkbox" name="cat" value="Footwear"> Footwear &amp; Boots</label>
+                  <label class="facet-cb"><input type="checkbox" name="cat" value="Accessories"> Watches &amp; Bags</label>
+
+                  <div class="facet-title" style="margin-top: 18px;">Max Price: <span id="sim-price-label">250 €</span></div>
+                  <input type="range" id="sim-price-range" min="20" max="350" value="250" class="facet-slider">
+                </div>
+
+                <!-- Matches -->
+                <div class="sim-feed">
+                  <div class="feed-topbar">
+                    <span id="sim-results-count">Showing 3 Instant Matches</span>
+                    <span class="mono">FULLTEXT Index Active</span>
+                  </div>
+                  <div class="sim-grid" id="sim-results-grid">
+                    <!-- Populated by main.js -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREENSHOT GALLERY -->
+      <section class="section">
+        <div class="wrap">
+          <div class="section-top">
+            <div class="mono">STOREFRONT &amp; ADMIN PANEL</div>
+            <h2 class="section-title">Module Screenshots</h2>
+            <p class="section-desc">Click any image to view in high-resolution lightbox.</p>
+          </div>
+
+          <div class="screenshots-grid">
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/01_instant_search_modal.png">
+              <img src="/assets/images/perfectsearch/01_instant_search_modal.png" alt="Instant Search Modal Layout">
+              <figcaption>Instant Live Search Modal with Stock &amp; Tax Calculation</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/02_filters_and_facets.png">
+              <img src="/assets/images/perfectsearch/02_filters_and_facets.png" alt="Dynamic Category & Price Facets">
+              <figcaption>Real-time Category Facets &amp; Dynamic Price Slider</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/03_typo_tolerance.png">
+              <img src="/assets/images/perfectsearch/03_typo_tolerance.png" alt="Soundex Typo-Tolerance Demonstration">
+              <figcaption>Metaphone Soundex Typo Tolerance in Action</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/06_admin_display_settings.png">
+              <img src="/assets/images/perfectsearch/06_admin_display_settings.png" alt="Admin Display & Trigger Settings">
+              <figcaption>Back Office: Display, Color &amp; Custom Trigger Settings</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/07_admin_batch_indexer.png">
+              <img src="/assets/images/perfectsearch/07_admin_batch_indexer.png" alt="Asynchronous Batch Catalog Indexer">
+              <figcaption>Back Office: Non-blocking Asynchronous Batch Catalog Indexer</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/perfectsearch/08_admin_search_analytics.png">
+              <img src="/assets/images/perfectsearch/08_admin_search_analytics.png" alt="Search Analytics Dashboard">
+              <figcaption>Back Office: Merchant Analytics &amp; Zero-Result Query Log</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDER CALLOUT CARD -->
+      <section class="section">
+        <div class="wrap">
+          <div class="order-box">
+            <div>
+              <h3>Ready to Speed Up Search on Your PrestaShop Store?</h3>
+              <p>Includes complete module ZIP, documentation, lifetime updates, and 1-on-1 author installation support.</p>
+            </div>
+            <div class="order-cta-side">
+              <div class="order-price">49,99 €</div>
+              <button type="button" class="btn btn-primary open-buy-modal" data-product="perfectsearch" data-price="49,99 €">
+                Order License Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 3: DEDICATED PRODUCT PAGE — FESTIVEFLOW™                         -->
+    <!-- ======================================================================= -->
+    <section id="view-festiveflow" class="spa-view">
+      <div class="product-page-hero">
+        <div class="wrap">
+          <div class="crumb">
+            <a href="#/">Home</a> <span>/</span> <span>Modules</span> <span>/</span> <span class="current">FestiveFlow™</span>
+          </div>
+
+          <div class="pp-hero-grid">
+            <!-- Left Side: Header, Lead, Compact Specs Strip, Actions -->
+            <div class="pp-head">
+              <div class="meta-tag">
+                <span class="meta-dot"></span>
+                <span>PRESTASHOP 1.7 - 9.X • PHP 7.4 - 8.2+ • COMMERCIAL MODULE</span>
+              </div>
+              <h1 class="pp-title">FestiveFlow™ <span class="pp-ver">v1.0.0</span></h1>
+              <p class="pp-lead">
+                Seasonal Marketing, Holiday Atmosphere &amp; Coupon Suite for PrestaShop. 
+                Turn holiday footfall into revenue spikes with hardware-accelerated canvas celebrations, a floating coupon gift box, 
+                and server-synchronized countdown ribbons — with guaranteed zero checkout disruption.
+              </p>
+              
+              <div class="pp-specs-strip pp-specs-grid">
+                <div class="spec-cell">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <div><strong>Checkout Guard:</strong> Auto-pauses on Cart &amp; Checkout funnels</div>
+                </div>
+                <div class="spec-cell">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+                  <div><strong>Cart Rule Sync:</strong> Native PrestaShop discount codes &amp; vouchers</div>
+                </div>
+                <div class="spec-cell">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                  <div><strong>Delta Physics:</strong> 60-144 FPS HTML5 Canvas (&lt;25KB, 0 jQuery)</div>
+                </div>
+                <div class="spec-cell">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                  <div><strong>5 Holiday Presets:</strong> Snow, Fireworks, Halloween, Hearts, Stardust</div>
+                </div>
+              </div>
+
+              <div class="pp-actions-row">
+                <button type="button" class="btn btn-primary open-buy-modal" data-product="festiveflow" data-price="29,99 €">
+                  <span>Acquire License — 29,99 € (One-Time)</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <a href="mailto:tdawebservices@gmail.com?subject=FestiveFlow%20Inquiry" class="btn btn-outline">
+                  Inquire via Email
+                </a>
+              </div>
+            </div>
+
+            <!-- Right Side: FestiveFlow Video Showcase -->
+            <div class="pp-hero-media">
+              <div class="hero-video-card">
+                <div class="hero-video-header">
+                  <span class="video-indicator"></span>
+                  <span class="video-label">FestiveFlow™ Product Video &amp; Demo</span>
+                  <span class="video-badge">PrestaShop Ready</span>
+                </div>
+                <div class="hero-video-wrapper">
+                  <video class="hero-video-player" controls autoplay muted loop playsinline preload="metadata">
+                    <source src="assets/videos/video.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                  </video>
+                </div>
+                <div class="hero-video-footer">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+                  <span>Video walkthrough showing holiday snowfall presets, interactive gift vouchers &amp; backoffice controls</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INTERACTIVE FESTIVE CANVAS STUDIO (Fixed Sleek Sky Mascot) -->
+      <section class="section product-sandbox-section">
+        <div class="wrap">
+          <div class="sandbox-box">
+            <div class="sandbox-header">
+              <div class="mono" style="color:var(--accent);">LIVE INTERACTIVE TESTBED</div>
+              <h3>Experience FestiveFlow Holiday Presets &amp; Gift Box</h3>
+              <p>Switch between celebration presets below and test the interactive coupon voucher dialog.</p>
+            </div>
+
+            <div class="festive-sim-console">
+              <!-- Controls -->
+              <div class="festive-toolbar">
+                <div class="preset-pill-group">
+                  <button type="button" class="preset-pill active" data-preset="christmas">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/></svg>
+                    Christmas
+                  </button>
+                  <button type="button" class="preset-pill" data-preset="halloween">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+                    Halloween
+                  </button>
+                  <button type="button" class="preset-pill" data-preset="blackfriday">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+                    Black Friday
+                  </button>
+                  <button type="button" class="preset-pill" data-preset="valentines">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    Valentine's
+                  </button>
+                  <button type="button" class="preset-pill" data-preset="newyear">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                    New Year
+                  </button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline" id="launch-mascot-btn">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                  Launch Sky Mascot Sleigh
+                </button>
+              </div>
+
+              <!-- Interactive Stage with Local Canvas -->
+              <div class="festive-local-stage">
+                <canvas id="festive-local-canvas" class="local-canvas"></canvas>
+                <div class="stage-info-overlay">
+                  <h4 id="local-stage-title">Christmas &amp; Winter Wonderland Preset</h4>
+                  <p id="local-stage-desc">Gentle falling snowflakes with natural drift on a GPU-accelerated canvas layer.</p>
+                  <div class="stage-actions">
+                    <button type="button" class="btn btn-sm btn-accent" id="trigger-voucher-demo-btn">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/></svg>
+                      Test Customer Voucher Dialog
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCREENSHOT GALLERY -->
+      <section class="section">
+        <div class="wrap">
+          <div class="section-top">
+            <div class="mono">PRESETS &amp; BACK OFFICE</div>
+            <h2 class="section-title">Module Screenshots</h2>
+            <p class="section-desc">Click any image to view in high-resolution lightbox.</p>
+          </div>
+
+          <div class="screenshots-grid">
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/01-storefront-christmas-hero.png">
+              <img src="/assets/images/festiveflow/01-storefront-christmas-hero.png" alt="Christmas Snowfall Theme">
+              <figcaption>Christmas &amp; Winter Wonderland Storefront</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/04-halloween-preset.png">
+              <img src="/assets/images/festiveflow/04-halloween-preset.png" alt="Halloween Preset">
+              <figcaption>Spooky Halloween Preset with Bats &amp; Pumpkins</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/05-black-friday-preset.png">
+              <img src="/assets/images/festiveflow/05-black-friday-preset.png" alt="Black Friday Preset">
+              <figcaption>Black Friday Gold Sparkles &amp; Flash Banners</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/06-valentines-preset.png">
+              <img src="/assets/images/festiveflow/06-valentines-preset.png" alt="Valentine's Day Preset">
+              <figcaption>Valentine's Day Floating Hearts Preset</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/07-new-year-preset.png">
+              <img src="/assets/images/festiveflow/07-new-year-preset.png" alt="New Year Confetti Preset">
+              <figcaption>New Year Celebration Confetti Preset</figcaption>
+            </figure>
+            <figure class="ss-item lightbox-trigger" data-full="/assets/images/festiveflow/02-gift-box-dialog.png">
+              <img src="/assets/images/festiveflow/02-gift-box-dialog.png" alt="Interactive Gift Box Dialog">
+              <figcaption>Interactive Coupon Gift Box Dialog with 1-Click Copy</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ORDER CALLOUT CARD -->
+      <section class="section">
+        <div class="wrap">
+          <div class="order-box">
+            <div>
+              <h3>Ready to Elevate Holiday Sales on Your PrestaShop Store?</h3>
+              <p>One module covers all 5 holiday seasons. Includes full source code and author installation support.</p>
+            </div>
+            <div class="order-cta-side">
+              <div class="order-price">29,99 €</div>
+              <button type="button" class="btn btn-primary open-buy-modal" data-product="festiveflow" data-price="29,99 €">
+                Order License Now
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 4: SERVICES DETAIL PAGE                                          -->
+    <!-- ======================================================================= -->
+    <section id="view-services" class="spa-view">
+      <div class="product-page-hero">
+        <div class="wrap">
+          <div class="crumb">
+            <a href="#/">Home</a> <span>/</span> <span class="current">Engineering Services</span>
+          </div>
+          <div class="pp-head">
+            <h1 class="pp-title">Bespoke E-Commerce &amp; Full-Stack Engineering</h1>
+            <p class="pp-lead">
+              We are senior software developers, not sales middlemen. Partner directly with our 3-developer team for 
+              PrestaShop upgrades, custom modules, WooCommerce platforms, Laravel web applications, and database speed tuning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding-bottom: 80px;">
+        <div class="services-full-list">
+          <div class="sfi-card">
+            <h3>PrestaShop Upgrades &amp; Custom Modules</h3>
+            <p>
+              PrestaShop is our core expertise. We architect custom modules adhering strictly to modern Symfony and PrestaShop standards. 
+              Whether you need warehouse ERP integrations, custom payment gateways, or a safe upgrade from PrestaShop 1.7 to 8.x/9.x, we deliver with zero data loss.
+            </p>
+            <div class="sfi-meta">PrestaShop 1.7, 8.x, 9.x • PHP 8.x • Custom Module Dev • Database Migrations</div>
+          </div>
+
+          <div class="sfi-card">
+            <h3>Core Web Vitals &amp; Database Speed Audits</h3>
+            <p>
+              A slow database costs real orders. We profile slow MySQL queries, implement Redis/OPcache caching, optimize rendering paths, 
+              and strip out bloatware to bring store load times under 1 second.
+            </p>
+            <div class="sfi-meta">MySQL Slow Query Profiling • Redis • Asset Minification • PageSpeed 90+</div>
+          </div>
+
+          <div class="sfi-card">
+            <h3>Laravel &amp; Custom PHP Web Applications</h3>
+            <p>
+              When off-the-shelf software doesn't fit your business logic, we build custom web applications on Laravel. 
+              From supplier inventory portals to custom CRM connectors and REST/GraphQL APIs, we write maintainable, tested code.
+            </p>
+            <div class="sfi-meta">Laravel 11 • RESTful &amp; GraphQL APIs • Background Queues • Custom Microservices</div>
+          </div>
+        </div>
+
+        <div class="order-box" style="margin-top: 40px;">
+          <div>
+            <h3>Have a Specific Project or Problem to Solve?</h3>
+            <p>Tell us about your store, tech stack, and goals. We reply within 4 hours with an actionable recommendation.</p>
+          </div>
+          <div class="order-cta-side">
+            <a href="#/contact" class="btn btn-primary">Start Conversation &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 5: ABOUT US / OUR STORY                                          -->
+    <!-- ======================================================================= -->
+    <section id="view-about" class="spa-view">
+      <div class="product-page-hero">
+        <div class="wrap">
+          <div class="crumb">
+            <a href="#/">Home</a> <span>/</span> <span class="current">Our Story</span>
+          </div>
+          <div class="pp-head">
+            <h1 class="pp-title">Meet TDA Engineering Studio</h1>
+            <p class="pp-lead">
+              We are 3 colleague developers who joined forces to build high-performance e-commerce software 
+              and provide boutique engineering without corporate bureaucracy.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding-bottom: 80px;">
+        <div class="about-story-layout">
+          <div class="story-text">
+            <h3>The Story Behind Our Partnership</h3>
+            <p>
+              We work together as senior software engineers in a technology firm. During years of building and maintaining high-traffic e-commerce stores, 
+              we repeatedly encountered the same pain points: sluggish database queries, bloated third-party plugins that disrupted checkout funnels, 
+              and marketplace modules with security flaws and unresponsive support.
+            </p>
+            <p>
+              We started TDA as our partnered side project to engineer the modules we wished existed: 
+              <strong>PerfectSearch</strong> (lightning-fast, flat-indexed live search that requires zero monthly SaaS fees) and 
+              <strong>FestiveFlow</strong> (holiday marketing atmosphere engineered with delta-time canvas physics and zero checkout disruption).
+            </p>
+
+            <h3>The Marketplace Reality &amp; Our Direct Model</h3>
+            <p>
+              When we attempted to distribute our products through traditional marketplaces like PrestaShop Addons and CodeCanyon, 
+              we ran into the typical obstacles independent engineers face: arbitrary geographic payment restrictions (such as Indian Stripe merchant limits) 
+              and opaque marketplace rejections without actionable technical feedback.
+            </p>
+            <p>
+              We decided to bypass the middlemen entirely. Reaching out directly to store owners allows us to eliminate the 40% marketplace commissions, 
+              pass the savings directly to you, and provide <strong>1-on-1 author installation and direct developer support</strong>.
+            </p>
+          </div>
+
+          <div class="story-principles">
+            <div class="principle-box">
+              <span class="mono">PRINCIPLE 01</span>
+              <h4>Engineering Over Marketing</h4>
+              <p>We don't sell bloated templates or buzzwords. We benchmark database queries, optimize memory, and write clean, auditable code.</p>
+            </div>
+            <div class="principle-box">
+              <span class="mono">PRINCIPLE 02</span>
+              <h4>Direct Access to the Authors</h4>
+              <p>When you contact us, you speak directly with the developer who built the module. No junior dispatchers, no delays.</p>
+            </div>
+            <div class="principle-box">
+              <span class="mono">PRINCIPLE 03</span>
+              <h4>Respect Store Conversions</h4>
+              <p>Every feature we build has conversion protection baked in. We will never add elements that increase page weight or interfere with checkout.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================= -->
+    <!-- VIEW 6: CONTACT & PROPOSAL PAGE (Direct Email & Inquiries)            -->
+    <!-- ======================================================================= -->
+    <section id="view-contact" class="spa-view">
+      <div class="product-page-hero">
+        <div class="wrap">
+          <div class="crumb">
+            <a href="#/">Home</a> <span>/</span> <span class="current">Contact &amp; Inquiries</span>
+          </div>
+          <div class="pp-head">
+            <h1 class="pp-title">Let's Connect</h1>
+            <p class="pp-lead">
+              Whether you want to license PerfectSearch or FestiveFlow, or need custom engineering for your store, 
+              reach out directly to our founders.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="wrap" style="padding-bottom: 80px;">
+        <div class="contact-layout">
+          <!-- Form -->
+          <div class="contact-card">
+            <h3>Send Us a Direct Message</h3>
+            <p>Choose your area of interest to send a direct message to our development team.</p>
+
+            <!-- Persistent Success Confirmation (Dismissed only manually) -->
+            <div id="contact-success-box" class="form-success-banner" style="display: none;">
+              <div class="success-banner-content">
+                <div class="success-icon-wrap">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <div>
+                  <h4 class="success-title">Message Delivered to Founders!</h4>
+                  <p class="success-desc">
+                    Your inquiry has been successfully sent to <strong>tdawebservices@gmail.com</strong>. 
+                    Our senior engineers will review your store details and reply directly within 4 hours.
+                  </p>
+                </div>
+              </div>
+              <button type="button" class="success-dismiss-btn" id="dismiss-contact-success">
+                Dismiss ✕
+              </button>
+            </div>
+
+            <form id="inquiry-form" class="clean-form" onsubmit="return false;">
+              <div class="form-row">
+                <label for="contact-interest">I am interested in:</label>
+                <select id="contact-interest" class="form-input">
+                  <option value="both-modules">Both Modules Bundle (69,99 € Special Deal)</option>
+                  <option value="perfectsearch">PerfectSearch Module License (49,99 €)</option>
+                  <option value="festiveflow">FestiveFlow Module License (29,99 €)</option>
+                  <option value="custom-dev">Custom PrestaShop / E-Commerce Development</option>
+                  <option value="speed-audit">Free Store Speed &amp; Performance Audit</option>
+                  <option value="general">General Consultation</option>
+                </select>
+              </div>
+
+              <div class="form-grid-2">
+                <div class="form-row">
+                  <label for="contact-name">Your Name:</label>
+                  <input type="text" id="contact-name" class="form-input" placeholder="e.g. Alex Smith" required>
+                </div>
+                <div class="form-row">
+                  <label for="contact-email">Your Email:</label>
+                  <input type="email" id="contact-email" class="form-input" placeholder="name@store.com" required>
+                </div>
+              </div>
+
+              <div class="form-row">
+                <label for="contact-store">Your Store URL or Tech Stack (Optional):</label>
+                <input type="text" id="contact-store" class="form-input" placeholder="e.g. mystore.com (PrestaShop 8.1)">
+              </div>
+
+              <div class="form-row">
+                <label for="contact-message">Details or Questions:</label>
+                <textarea id="contact-message" class="form-input" rows="4" placeholder="Tell us about your requirements or specific theme..."></textarea>
+              </div>
+
+              <div class="form-buttons">
+                <button type="button" class="btn btn-primary" id="submit-inquiry-btn">
+                  <span>Send Message to Engineers</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+                <button type="button" class="btn btn-outline" id="copy-email-btn">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                  <span>Copy Email</span>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Channel Info -->
+          <div class="contact-sidebar">
+            <div class="info-tile">
+              <span class="mono">OFFICIAL DIRECT EMAIL</span>
+              <a href="mailto:tdawebservices@gmail.com" class="direct-email-link">tdawebservices@gmail.com</a>
+              <p>Direct reply guaranteed within 4 hours (Monday – Saturday).</p>
+            </div>
+
+            <div class="info-tile">
+              <span class="mono">COMPLIMENTARY OFFER</span>
+              <h4>Free Store Performance Audit</h4>
+              <p>Send us your store link. We will run a database &amp; Core Web Vitals audit and share an actionable 1-page report — 100% free.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================= -->
+  <!-- MODALS: PURCHASE & VOUCHER & LIGHTBOX                                     -->
+  <!-- ========================================================================= -->
+
+  <!-- PURCHASE / ORDER MODAL -->
+  <div id="purchase-modal" class="modal-backdrop" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" id="purchase-modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-body">
+        <span class="mono">DIRECT AUTHOR LICENSE</span>
+        <h3 id="pm-selected-item">PerfectSearch™ Commercial License</h3>
+        <div class="pm-price" id="pm-selected-price">49,99 €</div>
+        <p class="pm-note">
+          Includes full production package ZIP, lifetime updates, and 1-on-1 author installation on your store.
+        </p>
+        <div class="modal-actions-col">
+          <a href="mailto:tdawebservices@gmail.com?subject=License%20Purchase%20Inquiry" class="btn btn-primary w-100" id="pm-email-link">
+            <span>Send Order Email to tdawebservices@gmail.com</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+          <button type="button" class="btn btn-outline w-100" id="pm-copy-details-btn">
+            📋 Copy Order Summary
+          </button>
+        </div>
+        <small class="pm-secure">🔒 Secure invoice provided via Stripe direct link or PayPal upon request.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- FESTIVEFLOW VOUCHER DIALOG -->
+  <div id="gift-modal" class="modal-backdrop" aria-hidden="true" role="dialog">
+    <div class="modal-dialog">
+      <button type="button" class="modal-close" id="gift-modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-body text-center">
+        <div style="margin-bottom: 8px; color:var(--accent);">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin:0 auto;"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></svg>
+        </div>
+        <span class="mono">FESTIVEFLOW™ VOUCHER FLOW</span>
+        <h3>Holiday Offer Unlocked!</h3>
+        <p>Get <strong>30% OFF</strong> custom module engineering or bundle both modules for just 69,99 €!</p>
+        <div class="coupon-box">
+          <span class="coupon-code" id="coupon-code-text">TDAFESTIVE30</span>
+          <button type="button" class="btn btn-sm btn-primary" id="copy-coupon-btn">Copy Code</button>
+        </div>
+        <small>Quote this code in your email to <strong>tdawebservices@gmail.com</strong>.</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- IMAGE LIGHTBOX -->
+  <div id="lightbox-modal" class="lightbox-backdrop" aria-hidden="true" role="dialog">
+    <button type="button" class="lightbox-close" id="lightbox-close" aria-label="Close preview">&times;</button>
+    <div class="lightbox-content">
+      <img src="" alt="Screenshot Full View" id="lightbox-image">
+      <div class="lightbox-caption" id="lightbox-caption"></div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="toast-container" aria-live="polite"></div>
+
+  <!-- ========================================================================= -->
+  <!-- CLEAN EDITORIAL FOOTER                                                    -->
+  <!-- ========================================================================= -->
+  <footer class="site-footer">
+    <div class="wrap footer-wrap">
+      <div class="footer-col-brand">
+        <a href="#/" class="footer-logo">
+          <img src="/assets/images/logo-tda.png" alt="TDA Engineering Studio" class="site-logo-img-footer">
+        </a>
+        <p class="footer-tagline">
+          High-performance PrestaShop modules &amp; bespoke full-stack engineering. 
+          Founded and built by 3 senior developers.
+        </p>
+        <div class="footer-email-link">
+          <a href="mailto:tdawebservices@gmail.com">tdawebservices@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="footer-nav-col">
+        <span class="mono">MODULES</span>
+        <a href="#/products/perfectsearch">PerfectSearch™ Live Search</a>
+        <a href="#/products/festiveflow">FestiveFlow™ Atmosphere Suite</a>
+      </div>
+
+      <div class="footer-nav-col">
+        <span class="mono">STUDIO</span>
+        <a href="#/services">Engineering Services</a>
+        <a href="#/about">Why Direct Outreach</a>
+        <a href="#/contact">Contact Us</a>
+      </div>
+
+      <div class="footer-nav-col">
+        <span class="mono">STANDARDS</span>
+        <span class="footer-badge">PrestaShop 1.7 - 9.x</span>
+        <span class="footer-badge">PHP 7.4 - 8.3</span>
+        <span class="footer-badge">100% Direct Support</span>
+      </div>
+    </div>
+
+    <div class="sub-footer">
+      <div class="wrap sub-footer-wrap">
+        <div>&copy; 2026 TDA Engineering Studio. Crafted for high-conversion e-commerce.</div>
+        <div>Contact: <a href="mailto:tdawebservices@gmail.com">tdawebservices@gmail.com</a></div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Application Bundle & Direct Script Loading -->
+  <script>
+/**
+ * TDA ENGINEERING STUDIO — MASTER APPLICATION LOGIC
+ * Clean SPA Router, Interactive Hero Search & Benchmark Calculator,
+ * Elegant Canvas Celebration & Sky Mascot (No weird emojis),
+ * Direct Mail Submission to tdawebservices@gmail.com
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+
+  /* ===========================================================================
+     1. SPA ROUTER
+  =========================================================================== */
+  const views = {
+    '': 'view-home',
+    '#': 'view-home',
+    '#/': 'view-home',
+    '#home': 'view-home',
+    '#/products/perfectsearch': 'view-perfectsearch',
+    '#/products/festiveflow': 'view-festiveflow',
+    '#/services': 'view-services',
+    '#/about': 'view-about',
+    '#/contact': 'view-contact'
+  };
+
+  const titles = {
+    'view-home': 'TDA Engineering Studio | PrestaShop Modules & Bespoke Development',
+    'view-perfectsearch': 'PerfectSearch™ v1.1.0 | Sub-50ms Fast Live Search for PrestaShop',
+    'view-festiveflow': 'FestiveFlow™ v1.0.0 | Seasonal Marketing & Atmosphere Suite for PrestaShop',
+    'view-services': 'Bespoke Engineering Services | TDA Studio',
+    'view-about': 'Our Story & Direct Model | TDA Studio',
+    'view-contact': 'Contact Us | TDA Studio'
+  };
+
+  function handleRoute() {
+    let hash = window.location.hash.toLowerCase().trim();
+
+    // Check in-page anchors on home view
+    if (hash === '#products-overview' || hash === '#about-us' || hash === '#services' || hash === '#benchmark') {
+      activateView('view-home');
+      setTimeout(() => {
+        const el = document.querySelector(hash);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      }, 50);
+      return;
+    }
+
+    const targetViewId = views[hash] || 'view-home';
+    activateView(targetViewId);
+  }
+
+  function activateView(viewId) {
+    document.querySelectorAll('.spa-view').forEach(v => v.classList.remove('active'));
+    const target = document.getElementById(viewId);
+    if (target) {
+      target.classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.title = titles[viewId] || 'TDA Engineering Studio';
+    }
+
+    // Update active nav links
+    document.querySelectorAll('.nav-link, .mobile-nav-link').forEach(link => {
+      link.classList.remove('active');
+      const href = link.getAttribute('href') || '';
+      if (
+        (viewId === 'view-home' && (href === '#/' || href === '#' || href === '')) ||
+        (viewId === 'view-perfectsearch' && href.includes('perfectsearch')) ||
+        (viewId === 'view-festiveflow' && href.includes('festiveflow')) ||
+        (viewId === 'view-services' && href.includes('services')) ||
+        (viewId === 'view-about' && href.includes('about')) ||
+        (viewId === 'view-contact' && href.includes('contact'))
+      ) {
+        link.classList.add('active');
+      }
+    });
+
+    // Close mobile drawer
+    const drawer = document.getElementById('mobile-drawer');
+    if (drawer) drawer.classList.remove('open');
+
+    // Trigger canvas resize if switching to FestiveFlow view
+    if (viewId === 'view-festiveflow') {
+      setTimeout(resizeLocalCanvas, 60);
+    }
+  }
+
+  window.addEventListener('hashchange', handleRoute);
+  handleRoute();
+
+  // Mobile drawer toggle
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileDrawer = document.getElementById('mobile-drawer');
+  if (mobileToggle && mobileDrawer) {
+    mobileToggle.addEventListener('click', () => {
+      mobileDrawer.classList.toggle('open');
+    });
+  }
+
+
+  /* ===========================================================================
+     2. HOMEPAGE INTERACTIVE FEATURES
+  =========================================================================== */
+
+  // 2A. Interactive Hero Search Mockup
+  const heroSearchInput = document.getElementById('hero-search-input');
+  const heroResultName = document.getElementById('hero-result-name');
+  const heroResultMeta = document.getElementById('hero-result-meta');
+  const heroResultPrice = document.getElementById('hero-result-price');
+  const heroLatency = document.getElementById('hero-search-latency');
+
+  const heroMockResults = {
+    'waterproof': { name: 'Air Trail Pro Waterproof Sneaker', meta: 'SKU: TR-994 • Tax Incl. • In Stock', price: '129,00 €' },
+    'leather': { name: 'Minimalist Chrono Leather Watch', meta: 'SKU: WTC-08 • Italian Strap • In Stock', price: '210,00 €' },
+    'running': { name: 'Carbon Streak Marathon Runner', meta: 'SKU: CS-102 • Responsive Foam • In Stock', price: '145,00 €' },
+    'hoodie': { name: 'Tech Fleece Pullover Hoodie', meta: 'SKU: HOOD-FL-99 • Heavyweight Knit • In Stock', price: '89,00 €' },
+    'jacket': { name: 'Urban Stormproof Shell Jacket', meta: 'SKU: JKT-SHL-41 • 3-Layer GORE-TEX', price: '185,00 €' }
+  };
+
+  function updateHeroSearch(term) {
+    const q = term.toLowerCase().trim();
+    let match = heroMockResults['waterproof'];
+    for (let key in heroMockResults) {
+      if (q.includes(key)) {
+        match = heroMockResults[key];
+        break;
+      }
+    }
+    if (heroResultName) heroResultName.textContent = match.name;
+    if (heroResultMeta) heroResultMeta.textContent = match.meta;
+    if (heroResultPrice) heroResultPrice.textContent = match.price;
+    if (heroLatency) {
+      const ms = Math.floor(Math.random() * 8 + 32);
+      heroLatency.textContent = `${ms}ms`;
+    }
+  }
+
+  if (heroSearchInput) {
+    heroSearchInput.addEventListener('input', (e) => {
+      updateHeroSearch(e.target.value);
+    });
+  }
+
+  document.querySelectorAll('.hero-chip-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const chip = btn.getAttribute('data-chip');
+      if (heroSearchInput && chip) {
+        heroSearchInput.value = chip;
+        updateHeroSearch(chip);
+      }
+    });
+  });
+
+  // 2B. Interactive Catalog Benchmark Calculator on Homepage
+  const bcSlider = document.getElementById('bc-sku-slider');
+  const bcSkuCount = document.getElementById('bc-sku-count');
+  const bcPsLatency = document.getElementById('bc-ps-latency');
+  const bcCoreLatency = document.getElementById('bc-core-latency');
+  const bcSaasSavings = document.getElementById('bc-saas-savings');
+
+  function updateBenchmark() {
+    if (!bcSlider) return;
+    const skus = parseInt(bcSlider.value, 10);
+    if (bcSkuCount) bcSkuCount.textContent = `${skus.toLocaleString()} SKUs`;
+
+    // Latency calculations based on benchmark tests
+    const psMs = Math.round(28 + (skus / 50000) * 12);
+    const coreMs = Math.round(240 + (skus / 50000) * 620);
+    const annualSavings = Math.round(1200 + (skus / 50000) * 1800);
+
+    if (bcPsLatency) bcPsLatency.textContent = `${psMs}ms`;
+    if (bcCoreLatency) bcCoreLatency.textContent = `~${coreMs}ms (Slow joins)`;
+    if (bcSaasSavings) bcSaasSavings.textContent = `~${annualSavings.toLocaleString()} € / year saved`;
+  }
+
+  if (bcSlider) {
+    bcSlider.addEventListener('input', updateBenchmark);
+    updateBenchmark();
+  }
+
+
+  /* ===========================================================================
+     3. ISOLATED PERFECTSEARCH SANDBOX (On PerfectSearch Page Only)
+  =========================================================================== */
+  const mockCatalog = [
+    {
+      id: 101,
+      name: 'Tech Fleece Pullover Hoodie',
+      category: 'Apparel',
+      sku: 'HOOD-FL-99',
+      price: '89,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>',
+      keywords: ['hoodie', 'pullover', 'fleece', 'sweater', 'winter', 'apparel']
+    },
+    {
+      id: 102,
+      name: 'Urban Waterproof Shell Jacket',
+      category: 'Apparel',
+      sku: 'JKT-SHL-41',
+      price: '185,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.38 3.46 16 2a4 4 0 0 1-8 0L3.62 3.46a2 2 0 0 0-1.34 2.23l.58 3.47a1 1 0 0 0 .99.84H6v10c0 1.1.9 2 2 2h8a2 2 0 0 0 2-2V10h2.15a1 1 0 0 0 .99-.84l.58-3.47a2 2 0 0 0-1.34-2.23z"/></svg>',
+      keywords: ['jacket', 'waterproof', 'windbreaker', 'apparel', 'rain']
+    },
+    {
+      id: 103,
+      name: 'Air Trail Pro Waterproof Sneaker',
+      category: 'Footwear',
+      sku: 'SNK-TR-994',
+      price: '129,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m19 14-5-3-3 2-4-2-4 3v5h16v-5z"/><path d="M14 11V7l-4-2-5 3"/></svg>',
+      keywords: ['sneakers', 'shoes', 'running', 'trail', 'footwear', 'trainers', 'womne', 'men']
+    },
+    {
+      id: 104,
+      name: 'Leather Minimalist Chrono Watch',
+      category: 'Accessories',
+      sku: 'WTC-CH-08',
+      price: '210,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="7"/><polyline points="12 9 12 12 13.5 13.5"/><path d="M16.51 17.35l-.35 3.83a2 2 0 0 1-2 1.82H9.83a2 2 0 0 1-2-1.82l-.35-3.83m.01-10.7.35-3.83A2 2 0 0 1 9.83 1h4.35a2 2 0 0 1 2 1.82l.35 3.83"/></svg>',
+      keywords: ['watch', 'chrono', 'timepiece', 'leather', 'accessories']
+    },
+    {
+      id: 105,
+      name: 'Commuter All-Weather Backpack',
+      category: 'Accessories',
+      sku: 'BAG-COM-12',
+      price: '95,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10a4 4 0 0 1 4-4h8a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V10z"/><path d="M9 6V4a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><line x1="8" y1="14" x2="16" y2="14"/></svg>',
+      keywords: ['backpack', 'bag', 'travel', 'commuter', 'accessories']
+    },
+    {
+      id: 106,
+      name: 'Merino Wool Heavyweight Knit Beanie',
+      category: 'Apparel',
+      sku: 'BN-MER-02',
+      price: '34,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 19h20M5 19a7 7 0 0 1 14 0M12 5v2"/></svg>',
+      keywords: ['beanie', 'hat', 'wool', 'merino', 'apparel']
+    },
+    {
+      id: 107,
+      name: 'Pro Leather Chelsea Ankle Boots',
+      category: 'Footwear',
+      sku: 'BT-CHL-66',
+      price: '175,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2l-4-3-3 1-5-3-4 5z"/><path d="M8 9l3-4h3l2 4"/></svg>',
+      keywords: ['boots', 'chelsea', 'leather', 'shoes', 'footwear']
+    },
+    {
+      id: 108,
+      name: 'Ceramic Artisan Coffee Mug',
+      category: 'Accessories',
+      sku: 'MUG-ART-01',
+      price: '24,00 €',
+      iconSvg: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>',
+      keywords: ['mug', 'coffee', 'ceramic', 'cup', 'accessories']
+    }
+  ];
+
+  const typoMap = {
+    'womne': 'women',
+    'shoo': 'shoes',
+    'jaket': 'jacket',
+    'snkr': 'sneakers',
+    'hodie': 'hoodie',
+    'watc': 'watch',
+    'bakpak': 'backpack'
+  };
+
+  const simInput = document.getElementById('sim-search-input');
+  const simClear = document.getElementById('sim-search-clear');
+  const simGrid = document.getElementById('sim-results-grid');
+  const simCount = document.getElementById('sim-results-count');
+  const simSpeed = document.getElementById('sim-speed-indicator');
+  const simSlider = document.getElementById('sim-price-range');
+  const simPriceLbl = document.getElementById('sim-price-label');
+
+  function runSimSearch() {
+    if (!simGrid) return;
+
+    const raw = simInput ? simInput.value.trim().toLowerCase() : '';
+    const maxP = simSlider ? parseFloat(simSlider.value) : 250;
+
+    const checkedBoxes = Array.from(document.querySelectorAll('.facet-cb input:checked')).map(c => c.value);
+    const allowAll = checkedBoxes.includes('all') || checkedBoxes.length === 0;
+
+    // Metaphone soundex typo resolution
+    let norm = raw;
+    let typoFixed = false;
+    Object.keys(typoMap).forEach(t => {
+      if (raw.includes(t)) {
+        norm = norm.replace(t, typoMap[t]);
+        typoFixed = true;
+      }
+    });
+
+    const start = performance.now();
+    const tokens = norm.split(/\s+/).filter(Boolean);
+
+    const matches = mockCatalog.filter(item => {
+      const numPrice = parseFloat(item.price.replace(',', '.'));
+      if (numPrice > maxP) return false;
+      if (!allowAll && !checkedBoxes.includes(item.category)) return false;
+      if (tokens.length === 0) return true;
+
+      const fullStr = (item.name + ' ' + item.category + ' ' + item.sku + ' ' + item.keywords.join(' ')).toLowerCase();
+      return tokens.every(tok => fullStr.includes(tok));
+    });
+
+    const ms = Math.round(performance.now() - start + (Math.random() * 6 + 28));
+
+    if (simSpeed) simSpeed.innerHTML = `⚡ Latency: <strong>${ms}ms</strong>`;
+    if (simCount) {
+      const typoText = typoFixed ? ' <span style="color:var(--accent);font-size:0.75rem;">(Auto-corrected via Metaphone)</span>' : '';
+      simCount.innerHTML = `Showing <strong>${matches.length}</strong> Instant Matches${typoText}`;
+    }
+
+    if (matches.length === 0) {
+      simGrid.innerHTML = `
+        <div style="grid-column: 1 / -1; padding: 32px 16px; text-align: center; color: var(--ink-muted);">
+          <div style="margin-bottom: 8px; color: var(--accent);">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="margin: 0 auto;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          </div>
+          <strong style="color: var(--ink);">Zero results for "${raw}"</strong>
+          <p style="font-size: 0.85rem; margin-top: 4px;">PerfectSearch automatically logs this query in the Back Office so you know what catalog items to stock!</p>
+        </div>
+      `;
+      return;
+    }
+
+    simGrid.innerHTML = matches.map(item => `
+      <div class="sim-card">
+        <div class="sim-card-icon-box">${item.iconSvg}</div>
+        <div class="sim-card-cat">${item.category}</div>
+        <div class="sim-card-title">${item.name}</div>
+        <div class="sim-card-sku">SKU: ${item.sku}</div>
+        <div class="sim-card-foot">
+          <div class="sim-card-price">${item.price}</div>
+          <button type="button" class="btn btn-sm btn-primary add-sim-cart-btn" data-name="${item.name}">+ Cart</button>
+        </div>
+      </div>
+    `).join('');
+
+    simGrid.querySelectorAll('.add-sim-cart-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        const name = b.getAttribute('data-name');
+        b.textContent = '✓ Added!';
+        b.style.background = 'var(--accent)';
+        showToast(`🛒 "${name}" added to cart!`);
+        setTimeout(() => {
+          b.textContent = '+ Cart';
+          b.style.background = '';
+        }, 1600);
+      });
+    });
+  }
+
+  if (simInput) simInput.addEventListener('input', runSimSearch);
+  if (simClear) {
+    simClear.addEventListener('click', () => {
+      if (simInput) {
+        simInput.value = '';
+        simInput.focus();
+        runSimSearch();
+      }
+    });
+  }
+  if (simSlider) {
+    simSlider.addEventListener('input', (e) => {
+      if (simPriceLbl) simPriceLbl.textContent = `${e.target.value} €`;
+      runSimSearch();
+    });
+  }
+
+  document.querySelectorAll('.facet-cb input').forEach(cb => {
+    cb.addEventListener('change', () => {
+      if (cb.value === 'all' && cb.checked) {
+        document.querySelectorAll('.facet-cb input').forEach(other => {
+          if (other !== cb) other.checked = false;
+        });
+      } else if (cb.checked) {
+        const allCb = document.querySelector('.facet-cb input[value="all"]');
+        if (allCb) allCb.checked = false;
+      }
+      runSimSearch();
+    });
+  });
+
+  document.querySelectorAll('.query-pill').forEach(pill => {
+    pill.addEventListener('click', () => {
+      const q = pill.getAttribute('data-query');
+      if (simInput && q) {
+        simInput.value = q;
+        runSimSearch();
+      }
+    });
+  });
+
+  runSimSearch();
+
+
+  /* ===========================================================================
+     4. FESTIVEFLOW CANVAS & FIXED SLEEK SKY MASCOT (NO WEIRD EMOJIS)
+  =========================================================================== */
+  const localCanvas = document.getElementById('festive-local-canvas');
+  const lctx = localCanvas ? localCanvas.getContext('2d') : null;
+
+  let localPreset = 'christmas';
+  let localParticles = [];
+  let localMascots = [];
+  let lastTime = performance.now();
+
+  function resizeLocalCanvas() {
+    if (!localCanvas) return;
+    const parent = localCanvas.parentElement;
+    if (parent) {
+      localCanvas.width = parent.clientWidth || 800;
+      localCanvas.height = parent.clientHeight || 360;
+    }
+  }
+  window.addEventListener('resize', resizeLocalCanvas);
+  resizeLocalCanvas();
+
+  // Particle themes using clean geometric shapes & symbols (no text emojis)
+  const themes = {
+    christmas: { shapes: ['snowflake', 'dot', 'star'], colors: ['#ffffff', '#bae6fd', '#fef08a'], gravity: 0.8, wind: 0.5 },
+    halloween: { shapes: ['orb', 'star', 'dot'], colors: ['#fb923c', '#fdba74', '#891818'], gravity: 0.6, wind: 0.8 },
+    blackfriday: { shapes: ['star', 'sparkle', 'dot'], colors: ['#fbbf24', '#fef08a', '#fab12f'], gravity: 0.9, wind: 0.3 },
+    valentines: { shapes: ['heart', 'petal', 'dot'], colors: ['#f43f5e', '#fb7185', '#fda4af'], gravity: -0.6, wind: 0.4 },
+    newyear: { shapes: ['confetti', 'sparkle', 'star'], colors: ['#38bdf8', '#fbbf24', '#ec4899', '#22c55e'], gravity: 1.0, wind: 1.0 }
+  };
+
+  class LocalParticle {
+    constructor() {
+      this.reset(true);
+    }
+
+    reset(initial = false) {
+      const th = themes[localPreset] || themes.christmas;
+      this.shape = th.shapes[Math.floor(Math.random() * th.shapes.length)];
+      this.color = th.colors[Math.floor(Math.random() * th.colors.length)];
+      this.size = 8 + Math.random() * 10;
+      this.opacity = 0.35 + Math.random() * 0.55;
+
+      const w = localCanvas ? localCanvas.width : 800;
+      const h = localCanvas ? localCanvas.height : 360;
+
+      this.x = Math.random() * w;
+      if (th.gravity > 0) {
+        this.y = initial ? Math.random() * h : -20;
+      } else {
+        this.y = initial ? Math.random() * h : h + 20;
+      }
+
+      this.vy = (th.gravity + (Math.random() * 0.4 - 0.2)) * 1.4;
+      this.vx = (Math.random() * 2 - 1) * th.wind * 1.4;
+      this.rotation = Math.random() * Math.PI * 2;
+      this.vRot = Math.random() * 0.04 - 0.02;
+    }
+
+    update(dt) {
+      this.y += this.vy * (dt / 16);
+      this.x += this.vx * (dt / 16);
+      this.rotation += this.vRot;
+
+      if (!localCanvas) return;
+      if (this.vy > 0 && this.y > localCanvas.height + 25) this.reset();
+      else if (this.vy < 0 && this.y < -25) this.reset();
+      if (this.x < -25) this.x = localCanvas.width + 20;
+      if (this.x > localCanvas.width + 25) this.x = -20;
+    }
+
+    draw() {
+      if (!lctx) return;
+      lctx.save();
+      lctx.translate(this.x, this.y);
+      lctx.rotate(this.rotation);
+      lctx.globalAlpha = this.opacity;
+      lctx.fillStyle = this.color;
+      lctx.strokeStyle = this.color;
+
+      // Draw vector particle shapes cleanly
+      if (this.shape === 'heart') {
+        const s = this.size * 0.5;
+        lctx.beginPath();
+        lctx.moveTo(0, s / 4);
+        lctx.quadraticCurveTo(0, -s, s, -s);
+        lctx.quadraticCurveTo(s * 2, -s, s * 2, s / 3);
+        lctx.quadraticCurveTo(s * 2, s * 1.2, 0, s * 2);
+        lctx.quadraticCurveTo(-s * 2, s * 1.2, -s * 2, s / 3);
+        lctx.quadraticCurveTo(-s * 2, -s, -s, -s);
+        lctx.quadraticCurveTo(0, -s, 0, s / 4);
+        lctx.fill();
+      } else if (this.shape === 'star') {
+        lctx.beginPath();
+        for (let i = 0; i < 5; i++) {
+          lctx.lineTo(Math.cos((18 + i * 72) * Math.PI / 180) * this.size, -Math.sin((18 + i * 72) * Math.PI / 180) * this.size);
+          lctx.lineTo(Math.cos((54 + i * 72) * Math.PI / 180) * (this.size / 2), -Math.sin((54 + i * 72) * Math.PI / 180) * (this.size / 2));
+        }
+        lctx.closePath();
+        lctx.fill();
+      } else if (this.shape === 'confetti') {
+        lctx.fillRect(-this.size / 2, -this.size / 4, this.size, this.size / 2);
+      } else if (this.shape === 'snowflake') {
+        lctx.lineWidth = 1.5;
+        for (let i = 0; i < 3; i++) {
+          lctx.beginPath();
+          lctx.moveTo(-this.size, 0);
+          lctx.lineTo(this.size, 0);
+          lctx.stroke();
+          lctx.rotate(Math.PI / 3);
+        }
+      } else {
+        lctx.beginPath();
+        lctx.arc(0, 0, this.size / 2.5, 0, Math.PI * 2);
+        lctx.fill();
+      }
+
+      lctx.restore();
+    }
+  }
+
+  // Elegant Vector Sleigh / Sky Mascot with Particle Trail
+  class VectorSkyMascot {
+    constructor() {
+      this.x = -80;
+      this.y = 110 + Math.random() * 80;
+      this.speed = 3.6;
+      this.trail = [];
+    }
+
+    update(dt) {
+      this.x += this.speed * (dt / 16);
+      this.y += Math.sin(this.x * 0.02) * 1.2;
+
+      // Add stardust trail particles
+      if (Math.random() > 0.3) {
+        this.trail.push({
+          x: this.x - 20,
+          y: this.y + (Math.random() * 12 - 6),
+          size: Math.random() * 4 + 2,
+          alpha: 0.9,
+          color: Math.random() > 0.5 ? '#FAB12F' : '#ffffff'
+        });
+      }
+
+      for (let i = this.trail.length - 1; i >= 0; i--) {
+        this.trail[i].x -= 0.8;
+        this.trail[i].alpha -= 0.035;
+        if (this.trail[i].alpha <= 0) this.trail.splice(i, 1);
+      }
+    }
+
+    draw() {
+      if (!lctx) return;
+
+      // Draw stardust particle trail
+      for (let t of this.trail) {
+        lctx.save();
+        lctx.globalAlpha = Math.max(0, t.alpha);
+        lctx.fillStyle = t.color;
+        lctx.beginPath();
+        lctx.arc(t.x, t.y, t.size, 0, Math.PI * 2);
+        lctx.fill();
+        lctx.restore();
+      }
+
+      // Draw sleek stylized vector sleigh & holiday gift
+      lctx.save();
+      lctx.translate(this.x, this.y);
+
+      // Gold Runner
+      lctx.strokeStyle = '#FAB12F';
+      lctx.lineWidth = 3;
+      lctx.beginPath();
+      lctx.moveTo(-25, 14);
+      lctx.lineTo(20, 14);
+      lctx.quadraticCurveTo(34, 14, 38, 2);
+      lctx.stroke();
+
+      // Sleigh Body (Wine Red #891818)
+      lctx.fillStyle = '#891818';
+      lctx.beginPath();
+      lctx.moveTo(-22, 10);
+      lctx.lineTo(18, 10);
+      lctx.quadraticCurveTo(26, 10, 28, 2);
+      lctx.lineTo(12, -4);
+      lctx.lineTo(-24, -4);
+      lctx.closePath();
+      lctx.fill();
+
+      // Gift Box inside sleigh
+      lctx.fillStyle = '#FAB12F';
+      lctx.fillRect(-12, -14, 14, 12);
+      lctx.strokeStyle = '#891818';
+      lctx.lineWidth = 1.5;
+      lctx.strokeRect(-12, -14, 14, 12);
+
+      // Golden Ribbon
+      lctx.strokeStyle = '#ffffff';
+      lctx.lineWidth = 2;
+      lctx.beginPath();
+      lctx.moveTo(-5, -14);
+      lctx.lineTo(-5, -2);
+      lctx.moveTo(-12, -8);
+      lctx.lineTo(2, -8);
+      lctx.stroke();
+
+      lctx.restore();
+    }
+  }
+
+  function initLocalParticles() {
+    localParticles = [];
+    for (let i = 0; i < 35; i++) {
+      localParticles.push(new LocalParticle());
+    }
+  }
+  initLocalParticles();
+
+  function animateLocalCanvas(now) {
+    if (lctx && localCanvas) {
+      const dt = Math.min(now - lastTime, 100);
+      lastTime = now;
+
+      lctx.clearRect(0, 0, localCanvas.width, localCanvas.height);
+      for (let p of localParticles) {
+        p.update(dt);
+        p.draw();
+      }
+
+      for (let i = localMascots.length - 1; i >= 0; i--) {
+        const m = localMascots[i];
+        m.update(dt);
+        m.draw();
+        if (m.x > localCanvas.width + 100) localMascots.splice(i, 1);
+      }
+    }
+    requestAnimationFrame(animateLocalCanvas);
+  }
+  requestAnimationFrame(animateLocalCanvas);
+
+  // Preset switching
+  const presetDescs = {
+    christmas: { title: 'Christmas & Winter Wonderland Preset', desc: 'Gentle falling snowflakes with natural drift on a GPU-accelerated canvas layer.' },
+    halloween: { title: 'Spooky Halloween Preset', desc: 'Atmospheric harvest amber & garnet glowing particles for October promotions.' },
+    blackfriday: { title: 'Black Friday Gold Sparkles Preset', desc: 'Golden flares and celebratory starbursts for high-converting sales weekends.' },
+    valentines: { title: 'Valentine\'s Floating Hearts Preset', desc: 'Rose petals and hearts floating upward for jewelry, gifts, and fashion.' },
+    newyear: { title: 'New Year Celebration Confetti Preset', desc: 'Colorful confetti and streamers to celebrate product launches & new years.' }
+  };
+
+  document.querySelectorAll('.preset-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.preset-pill').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const p = btn.getAttribute('data-preset');
+      if (p && themes[p]) {
+        localPreset = p;
+        initLocalParticles();
+        const info = presetDescs[p];
+        if (info) {
+          const tEl = document.getElementById('local-stage-title');
+          const dEl = document.getElementById('local-stage-desc');
+          if (tEl) tEl.textContent = info.title;
+          if (dEl) dEl.textContent = info.desc;
+        }
+      }
+    });
+  });
+
+  const launchMascotBtn = document.getElementById('launch-mascot-btn');
+  if (launchMascotBtn) {
+    launchMascotBtn.addEventListener('click', () => {
+      localMascots.push(new VectorSkyMascot());
+      showToast('✨ Luminous Sky Mascot launched across stage!');
+    });
+  }
+
+
+  /* ===========================================================================
+     5. MODALS & DIRECT EMAIL DISPATCH (tdawebservices@gmail.com)
+  =========================================================================== */
+  const purchaseModal = document.getElementById('purchase-modal');
+  const purchaseClose = document.getElementById('purchase-modal-close');
+  const pmItem = document.getElementById('pm-selected-item');
+  const pmPrice = document.getElementById('pm-selected-price');
+  const pmEmailLink = document.getElementById('pm-email-link');
+  const pmCopyBtn = document.getElementById('pm-copy-details-btn');
+
+  const productsData = {
+    perfectsearch: {
+      name: 'PerfectSearch™ Live AJAX Search — Commercial License',
+      price: '49,99 €',
+      subject: 'Order Inquiry: PerfectSearch Module License (49,99 €)'
+    },
+    festiveflow: {
+      name: 'FestiveFlow™ Seasonal Atmosphere Suite — Commercial License',
+      price: '29,99 €',
+      subject: 'Order Inquiry: FestiveFlow Module License (29,99 €)'
+    }
+  };
+
+  let activeProduct = 'perfectsearch';
+
+  function openOrderModal(key = 'perfectsearch') {
+    activeProduct = key;
+    const data = productsData[key] || productsData.perfectsearch;
+
+    if (pmItem) pmItem.textContent = data.name;
+    if (pmPrice) pmPrice.textContent = data.price;
+
+    const emailBody = encodeURIComponent(
+      `Hello TDA Engineering Team,\n\nI would like to acquire a license for: ${data.name} (${data.price}).\n\nStore URL (optional): \nPrestaShop Version: \n\nPlease send the invoice and installation package to this email.\n\nThank you!`
+    );
+    if (pmEmailLink) {
+      pmEmailLink.href = `mailto:tdawebservices@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${emailBody}`;
+    }
+
+    if (purchaseModal) purchaseModal.classList.add('open');
+  }
+
+  function closeOrderModal() {
+    if (purchaseModal) purchaseModal.classList.remove('open');
+  }
+
+  document.querySelectorAll('.open-buy-modal').forEach(b => {
+    b.addEventListener('click', () => {
+      const p = b.getAttribute('data-product') || 'perfectsearch';
+      openOrderModal(p);
+    });
+  });
+
+  if (purchaseClose) purchaseClose.addEventListener('click', closeOrderModal);
+
+  if (pmCopyBtn) {
+    pmCopyBtn.addEventListener('click', () => {
+      const data = productsData[activeProduct] || productsData.perfectsearch;
+      const text = `Order Request:\nItem: ${data.name}\nPrice: ${data.price}\nDirect Contact: tdawebservices@gmail.com`;
+      navigator.clipboard.writeText(text).then(() => {
+        showToast('📋 Order summary copied to clipboard!');
+      });
+    });
+  }
+
+  // Voucher modal
+  const giftModal = document.getElementById('gift-modal');
+  const giftClose = document.getElementById('gift-modal-close');
+  const triggerVoucherBtn = document.getElementById('trigger-voucher-demo-btn');
+  const copyCouponBtn = document.getElementById('copy-coupon-btn');
+
+  if (triggerVoucherBtn) {
+    triggerVoucherBtn.addEventListener('click', () => {
+      if (giftModal) giftModal.classList.add('open');
+    });
+  }
+  if (giftClose) {
+    giftClose.addEventListener('click', () => {
+      if (giftModal) giftModal.classList.remove('open');
+    });
+  }
+  if (copyCouponBtn) {
+    copyCouponBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('TDAFESTIVE30').then(() => {
+        copyCouponBtn.textContent = '✓ Copied!';
+        showToast('Code "TDAFESTIVE30" copied to clipboard!');
+        setTimeout(() => { copyCouponBtn.textContent = 'Copy Code'; }, 1800);
+      });
+    });
+  }
+
+  // Lightbox
+  const lightbox = document.getElementById('lightbox-modal');
+  const lightboxClose = document.getElementById('lightbox-close');
+  const lightboxImg = document.getElementById('lightbox-image');
+  const lightboxCap = document.getElementById('lightbox-caption');
+
+  document.querySelectorAll('.lightbox-trigger').forEach(el => {
+    el.addEventListener('click', () => {
+      const src = el.getAttribute('data-full') || el.querySelector('img')?.getAttribute('src');
+      const cap = el.querySelector('figcaption')?.textContent || '';
+      if (lightbox && lightboxImg && src) {
+        lightboxImg.src = src;
+        if (lightboxCap) lightboxCap.textContent = cap;
+        lightbox.classList.add('open');
+      }
+    });
+  });
+
+  if (lightboxClose) {
+    lightboxClose.addEventListener('click', () => {
+      if (lightbox) lightbox.classList.remove('open');
+    });
+  }
+
+  // Global ESC Key Listener
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      closeOrderModal();
+      if (giftModal) giftModal.classList.remove('open');
+      if (lightbox) lightbox.classList.remove('open');
+    }
+  });
+
+
+  /* ===========================================================================
+     6. CONTACT FORM WITH REAL EMAIL SENDING & FALLBACK
+  =========================================================================== */
+  const submitInquiryBtn = document.getElementById('submit-inquiry-btn');
+  const copyEmailBtn = document.getElementById('copy-email-btn');
+
+  if (submitInquiryBtn) {
+    submitInquiryBtn.addEventListener('click', async () => {
+      const interest = document.getElementById('contact-interest')?.value || 'general';
+      const name = document.getElementById('contact-name')?.value || 'Prospective Client';
+      const email = document.getElementById('contact-email')?.value || '';
+      const store = document.getElementById('contact-store')?.value || 'Not specified';
+      const msg = document.getElementById('contact-message')?.value || '';
+
+      if (!email) {
+        showToast('Please enter your email address so we can reply.');
+        document.getElementById('contact-email')?.focus();
+        return;
+      }
+
+      const payload = {
+        name,
+        email,
+        store,
+        interest,
+        message: msg
+      };
+
+      submitInquiryBtn.disabled = true;
+      submitInquiryBtn.innerHTML = '<span>Sending Message...</span>';
+
+      try {
+        const response = await fetch('/api/send-mail', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const resData = await response.json();
+        if (resData.success) {
+          if (contactSuccessBox) {
+            contactSuccessBox.style.display = 'flex';
+            contactSuccessBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+          showToast('Your message has been delivered to our senior engineers! We will reply within 4 hours.', { autoClose: false, type: 'success' });
+          submitInquiryBtn.innerHTML = '<span>Message Delivered!</span>';
+          if (document.getElementById('inquiry-form')) {
+            document.getElementById('inquiry-form').reset();
+          }
+          setTimeout(() => {
+            submitInquiryBtn.disabled = false;
+            submitInquiryBtn.innerHTML = '<span>Send Another Message</span>';
+          }, 2500);
+          return;
+        } else {
+          throw new Error(resData.error || 'Server error');
+        }
+      } catch (err) {
+        console.warn('API send mail fetch failed, falling back to mailto:', err.message);
+        // Fallback to mailto link
+        const subject = encodeURIComponent(`[Inquiry] ${interest} from ${name}`);
+        const body = encodeURIComponent(
+          `Hello TDA Engineering Team,\n\nName: ${name} (${email})\nStore URL: ${store}\nInterest: ${interest}\n\nMessage:\n${msg}\n\nLooking forward to hearing from you.`
+        );
+        window.location.href = `mailto:tdawebservices@gmail.com?subject=${subject}&body=${body}`;
+        showToast('Opening email draft to tdawebservices@gmail.com...', { autoClose: false, type: 'success' });
+        submitInquiryBtn.disabled = false;
+        submitInquiryBtn.innerHTML = '<span>Send Message to Engineers</span>';
+      }
+    });
+  }
+
+  const contactSuccessBox = document.getElementById('contact-success-box');
+  const dismissSuccessBtn = document.getElementById('dismiss-contact-success');
+  if (dismissSuccessBtn && contactSuccessBox) {
+    dismissSuccessBtn.addEventListener('click', () => {
+      contactSuccessBox.style.display = 'none';
+    });
+  }
+
+  if (copyEmailBtn) {
+    copyEmailBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText('tdawebservices@gmail.com').then(() => {
+        showToast('tdawebservices@gmail.com copied to clipboard!');
+      });
+    });
+  }
+
+
+  /* ===========================================================================
+     7. TOAST NOTIFICATION (Supports manual close & persistent alerts)
+  =========================================================================== */
+  function showToast(msg, options = {}) {
+    const container = document.getElementById('toast-container');
+    if (!container) return;
+
+    const config = typeof options === 'boolean' 
+      ? { autoClose: options } 
+      : Object.assign({ autoClose: true, type: 'info', timeout: 3500 }, options);
+
+    const t = document.createElement('div');
+    t.className = `toast ${config.type === 'success' ? 'toast-success' : ''}`;
+    
+    const bodyEl = document.createElement('div');
+    bodyEl.className = 'toast-body';
+    bodyEl.innerHTML = `<span>${msg}</span>`;
+    t.appendChild(bodyEl);
+
+    const closeBtn = document.createElement('button');
+    closeBtn.type = 'button';
+    closeBtn.className = 'toast-close';
+    closeBtn.setAttribute('aria-label', 'Close notification');
+    closeBtn.innerHTML = '&times;';
+    closeBtn.addEventListener('click', () => {
+      t.style.opacity = '0';
+      t.style.transform = 'translateY(6px)';
+      t.style.transition = 'opacity 0.2s, transform 0.2s';
+      setTimeout(() => t.remove(), 210);
+    });
+    t.appendChild(closeBtn);
+
+    container.appendChild(t);
+
+    if (config.autoClose) {
+      setTimeout(() => {
+        if (!t.parentNode) return;
+        t.style.opacity = '0';
+        t.style.transform = 'translateY(6px)';
+        t.style.transition = 'opacity 0.25s, transform 0.25s';
+        setTimeout(() => t.remove(), 260);
+      }, config.timeout);
+    }
+  }
+
+});
+
+</script>
+</body>
+</html>
