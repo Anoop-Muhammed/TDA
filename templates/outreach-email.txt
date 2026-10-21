@@ -1,35 +1,41 @@
-Subject: PrestaShop performance & custom module for {{store_name}}
+Subject: PrestaShop module & development solutions for {{store_name}}
 
 Hi {{client_name}},
 
-I came across your PrestaShop store ({{store_url}}) and wanted to reach out directly with a solution engineered specifically for high-conversion stores like yours.
+I came across your PrestaShop store ({{store_url}}) and wanted to introduce our module and specialized PrestaShop development services.
 
-We are a specialized engineering team of 3 senior developers, and we have built {{module_name}} — a dedicated PrestaShop module designed to help store owners {{module_benefit}} without third-party SaaS fees, bloat, or slow response times.
+We have developed a dedicated PrestaShop module designed to help store owners {{module_benefit}} without unnecessary complexity or bloated recurring fees.
 
-Rather than just describing it, you can test drive it in action right now:
+Rather than just describing its features, we invite you to explore it yourself:
 
-• Live Module Showcase & Architecture: https://tda.workn.in/#/products/{{product_slug}}
-• Interactive Sandbox & Live Demo: {{demo_url}}
+1. Learn more about our module and services:
+Visit our website to discover what we offer, how the module works, and how we support PrestaShop merchants:
+https://tda.workn.in/#/products/{{product_slug}}
 
-Beyond our standalone modules, we provide full PrestaShop development services:
-- Custom module development & third-party API integrations (ERP, CRM, logistics)
-- Database latency reduction, sub-50ms search engines & Core Web Vitals tuning
-- Frictionless checkout UX & custom theme development
-- PrestaShop 1.7 to 8.x / 9.x migrations, security audits & bug fixing
+2. Experience the module on a live PrestaShop store:
+You can test drive the module in a real-world environment and explore its benefits firsthand:
+{{demo_url}}
 
-Our approach is straightforward: you work directly with senior developers, not agency account managers. We provide honest technical advice, zero exaggerated promises, and transparent communication.
+Along with our standalone module, we offer full-spectrum PrestaShop development services:
+- Custom module development & third-party integrations
+- Store speed, database indexing & Core Web Vitals optimization
+- Theme customization, store design improvements & frictionless checkout
+- Bug fixing, technical support & seamless PrestaShop 8.x/9.x upgrades
 
-Would you be open to a quick 5-minute chat, or having us audit your store's setup to see if {{module_name}} is a good fit?
+We believe in offering practical solutions, transparent communication, and honest technical advice. We won't make exaggerated promises without understanding your store and its technical needs first.
 
-Just reply to this email, and we can take it from there.
+We would be happy to discuss your store's requirements and explain how our solutions could fit your business.
+
+Thank you for your time. Simply reply to this email, and we can take it from there.
 
 Best regards,
 
 {{sender_name}}
-Senior PrestaShop Specialist | TDA Web Services
+TDA Web Services — Three Minds. One Digital Vision.
+PrestaShop Development & Solutions
 Website: https://tda.workn.in
-Direct Email: tdawebservices@gmail.com
-Phone / WhatsApp: {{phone_number}}
+Email: tdawebservices@gmail.com
+Direct: {{phone_number}}
 
 ---
 Note: If you do not wish to receive future communications, simply reply with "Unsubscribe" and we will respect your request immediately.
