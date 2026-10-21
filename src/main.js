@@ -707,16 +707,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (pmItem) pmItem.textContent = data.name;
     if (pmPrice) pmPrice.textContent = data.price;
-
-    const emailBody = encodeURIComponent(
-      `Hello TDA Engineering Team,\n\nI would like to acquire a license for: ${data.name} (${data.price}).\n\nStore URL (optional): \nPrestaShop Version: \n\nPlease send the invoice and installation package to this email.\n\nThank you!`
-    );
-    if (pmEmailLink) {
-      pmEmailLink.href = `mailto:tdawebservices@gmail.com?subject=${encodeURIComponent(data.subject)}&body=${emailBody}`;
-    }
+    if (pmEmailLink) pmEmailLink.setAttribute('data-product', key);
 
     if (purchaseModal) purchaseModal.classList.add('open');
   }
+
+  function closeOrderModal() {
+    if (purchaseModal) purchaseModal.classList.remove('open');
+  }
+
+  document.querySelectorAll('.open-buy-modal').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.preventDefault();
+      const p = b.getAttribute('data-product') || 'perfectsearch';
+      openOrderModal(p);
+    });
+  });
 
   function redirectToContactForProduct(prodKey, price) {
     const key = prodKey === 'festiveflow' ? 'festiveflow' : 'perfectsearch';
@@ -765,6 +771,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (purchaseClose) purchaseClose.addEventListener('click', closeOrderModal);
+
+  if (purchaseModal) {
+    purchaseModal.addEventListener('click', (e) => {
+      if (e.target === purchaseModal) closeOrderModal();
+    });
+  }
 
   if (pmCopyBtn) {
     pmCopyBtn.addEventListener('click', () => {
