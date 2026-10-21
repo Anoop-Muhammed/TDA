@@ -661,11 +661,62 @@ h1, h2, h3, h4 {
 }
 .about-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: clamp(20px, 4vw, 48px);
 }
 .about-label {
   padding-top: 8px;
+}
+.about-team-sidebar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about-sidebar-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(28, 21, 12, 0.04);
+}
+.sidebar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar-stat-val {
+  font-family: var(--f-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.sidebar-stat-lbl {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.35;
+}
+.sidebar-stat-sep {
+  height: 1px;
+  background: var(--line);
+  margin-block: 10px;
+}
+.sidebar-trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.sidebar-trust-pill svg {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 .about-big {
   font-size: clamp(1.9rem, 3.8vw, 3.2rem);
@@ -1563,6 +1614,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  margin-top: clamp(32px, 4.5vw, 56px);
 }
 .sfi-card {
   background: #fff;
@@ -1625,6 +1677,7 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 36px;
+  margin-top: clamp(32px, 4.5vw, 56px);
 }
 .contact-card {
   background: #fff;
@@ -1820,7 +1873,41 @@ h1, h2, h3, h4 {
   font-size: 0.88rem;
 }
 
-/* Toast & Success Banner */
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(137, 24, 24, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 350;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(137, 24, 24, 0.45);
+}
+.back-to-top svg {
+  display: block;
+}
 .toast-container {
   position: fixed;
   bottom: 24px;

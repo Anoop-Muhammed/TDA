@@ -751,11 +751,62 @@ h1, h2, h3, h4 {
 }
 .about-grid {
   display: grid;
-  grid-template-columns: 220px 1fr;
+  grid-template-columns: 240px 1fr;
   gap: clamp(20px, 4vw, 48px);
 }
 .about-label {
   padding-top: 8px;
+}
+.about-team-sidebar {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.about-sidebar-card {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 16px;
+  box-shadow: 0 4px 16px rgba(28, 21, 12, 0.04);
+}
+.sidebar-stat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.sidebar-stat-val {
+  font-family: var(--f-display);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.sidebar-stat-lbl {
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  line-height: 1.35;
+}
+.sidebar-stat-sep {
+  height: 1px;
+  background: var(--line);
+  margin-block: 10px;
+}
+.sidebar-trust-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #fff;
+  border: 1px solid var(--line);
+  padding: 9px 12px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.sidebar-trust-pill svg {
+  color: var(--accent);
+  flex-shrink: 0;
 }
 .about-big {
   font-size: clamp(1.9rem, 3.8vw, 3.2rem);
@@ -1653,6 +1704,7 @@ h1, h2, h3, h4 {
   display: flex;
   flex-direction: column;
   gap: 18px;
+  margin-top: clamp(32px, 4.5vw, 56px);
 }
 .sfi-card {
   background: #fff;
@@ -1715,6 +1767,7 @@ h1, h2, h3, h4 {
   display: grid;
   grid-template-columns: 1.15fr 0.85fr;
   gap: 36px;
+  margin-top: clamp(32px, 4.5vw, 56px);
 }
 .contact-card {
   background: #fff;
@@ -1910,7 +1963,41 @@ h1, h2, h3, h4 {
   font-size: 0.88rem;
 }
 
-/* Toast & Success Banner */
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 28px;
+  right: 28px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(137, 24, 24, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 350;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease, background-color 0.2s ease;
+}
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover {
+  background: var(--accent-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(137, 24, 24, 0.45);
+}
+.back-to-top svg {
+  display: block;
+}
 .toast-container {
   position: fixed;
   bottom: 24px;
@@ -2190,7 +2277,7 @@ h1, h2, h3, h4 {
           <div class="hero-content">
             <div class="meta-tag">
               <span class="meta-dot"></span>
-              <span>BOUTIQUE STUDIO • 3 SENIOR DEVELOPERS • DIRECT PARTNERSHIP</span>
+              <span>WEB SERVICES &amp; DEVELOPMENT • 3 SENIOR DEVELOPERS • DIRECT PARTNERSHIP</span>
             </div>
 
             <h1 class="hero-headline">
@@ -2318,10 +2405,6 @@ h1, h2, h3, h4 {
             Metaphone Soundex Typo Tolerance
           </div>
           <div class="ticker-item">
-            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
-            60-144 FPS HTML5 Canvas Physics
-          </div>
-          <div class="ticker-item">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle><polyline points="17 11 19 13 23 9"></polyline></svg>
             Direct Collaboration with 3 Senior Developers
           </div>
@@ -2338,6 +2421,30 @@ h1, h2, h3, h4 {
           <div class="about-grid">
             <div class="about-label">
               <span class="mono">ABOUT OUR TEAM</span>
+
+              <div class="about-team-sidebar">
+                <div class="about-sidebar-card">
+                  <div class="sidebar-stat">
+                    <span class="sidebar-stat-val">3</span>
+                    <span class="sidebar-stat-lbl">Senior Full-Stack Engineers</span>
+                  </div>
+                  <div class="sidebar-stat-sep"></div>
+                  <div class="sidebar-stat">
+                    <span class="sidebar-stat-val">100%</span>
+                    <span class="sidebar-stat-lbl">Direct Engineer Contact (No Middlemen)</span>
+                  </div>
+                  <div class="sidebar-stat-sep"></div>
+                  <div class="sidebar-stat">
+                    <span class="sidebar-stat-val">0 €</span>
+                    <span class="sidebar-stat-lbl">Monthly SaaS Fees on Modules</span>
+                  </div>
+                </div>
+
+                <div class="sidebar-trust-pill">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  <span>1-on-1 Author Setup Included</span>
+                </div>
+              </div>
             </div>
             <div class="about-content">
               <h2 class="about-big">
@@ -2425,48 +2532,7 @@ h1, h2, h3, h4 {
 
           <div class="product-panels-list">
             
-            <!-- PANEL 1: PERFECTSEARCH -->
-            <article class="panel panel-search">
-              <div class="panel-art">
-                <div class="panel-screenshot-card">
-                  <img src="/assets/images/perfectsearch/01_instant_search_modal.png" alt="PerfectSearch Instant Live Search Modal" class="panel-img">
-                </div>
-                <div class="panel-watermark">SEARCH</div>
-              </div>
-              <div class="panel-info">
-                <div>
-                  <div class="panel-meta">
-                    <span class="pill">PRESTASHOP 1.7 - 9.X</span>
-                    <span class="pill">PHP 7.4 - 8.3</span>
-                    <span class="pill-accent">FLAT MYSQL INDEX</span>
-                  </div>
-                  <h3 class="panel-name">PerfectSearch™ <span class="panel-ver">v1.1.0</span></h3>
-                  <p class="panel-tagline">The Sub-50ms Fast AJAX Live Search &amp; Merchant Intelligence Engine</p>
-                  <p class="panel-summary">
-                    Replaces sluggish core searches with an instant, dedicated flat-index FULLTEXT search table. 
-                    Includes Metaphone soundex typo tolerance, live price/stock rendering, search analytics to spot catalog gaps, 
-                    and B2B customer price privacy controls.
-                  </p>
-                  <ul class="panel-highlights">
-                    <li>Sub-50ms instant autocomplete bypassing slow multi-table joins</li>
-                    <li>Phonetic typo tolerance (e.g. "womne shoes" auto-resolves)</li>
-                    <li>Search analytics dashboard logging hits &amp; zero-result queries</li>
-                    <li>0 € / month forever — 100% self-hosted on your MySQL database</li>
-                  </ul>
-                </div>
-                <div class="panel-action">
-                  <div class="panel-price">
-                    <span>49,99 € <small>Euro</small></span>
-                    <small>One-time license • Free installation</small>
-                  </div>
-                  <a href="#/products/perfectsearch" class="btn btn-primary">
-                    <span>Explore Module &amp; Test Live Demo &rarr;</span>
-                  </a>
-                </div>
-              </div>
-            </article>
-
-            <!-- PANEL 2: FESTIVEFLOW -->
+            <!-- PANEL 1: FESTIVEFLOW (Now on Top) -->
             <article class="panel panel-festive">
               <div class="panel-art">
                 <div class="panel-screenshot-card">
@@ -2501,6 +2567,47 @@ h1, h2, h3, h4 {
                     <small>One-time license • Free installation</small>
                   </div>
                   <a href="#/products/festiveflow" class="btn btn-primary">
+                    <span>Explore Module &amp; Test Live Demo &rarr;</span>
+                  </a>
+                </div>
+              </div>
+            </article>
+
+            <!-- PANEL 2: PERFECTSEARCH -->
+            <article class="panel panel-search">
+              <div class="panel-art">
+                <div class="panel-screenshot-card">
+                  <img src="/assets/images/perfectsearch/01_instant_search_modal.png" alt="PerfectSearch Instant Live Search Modal" class="panel-img">
+                </div>
+                <div class="panel-watermark">SEARCH</div>
+              </div>
+              <div class="panel-info">
+                <div>
+                  <div class="panel-meta">
+                    <span class="pill">PRESTASHOP 1.7 - 9.X</span>
+                    <span class="pill">PHP 7.4 - 8.3</span>
+                    <span class="pill-accent">FLAT MYSQL INDEX</span>
+                  </div>
+                  <h3 class="panel-name">PerfectSearch™ <span class="panel-ver">v1.1.0</span></h3>
+                  <p class="panel-tagline">The Sub-50ms Fast AJAX Live Search &amp; Merchant Intelligence Engine</p>
+                  <p class="panel-summary">
+                    Replaces sluggish core searches with an instant, dedicated flat-index FULLTEXT search table. 
+                    Includes Metaphone soundex typo tolerance, live price/stock rendering, search analytics to spot catalog gaps, 
+                    and B2B customer price privacy controls.
+                  </p>
+                  <ul class="panel-highlights">
+                    <li>Sub-50ms instant autocomplete bypassing slow multi-table joins</li>
+                    <li>Phonetic typo tolerance (e.g. "womne shoes" auto-resolves)</li>
+                    <li>Search analytics dashboard logging hits &amp; zero-result queries</li>
+                    <li>0 € / month forever — 100% self-hosted on your MySQL database</li>
+                  </ul>
+                </div>
+                <div class="panel-action">
+                  <div class="panel-price">
+                    <span>49,99 € <small>Euro</small></span>
+                    <small>One-time license • Free installation</small>
+                  </div>
+                  <a href="#/products/perfectsearch" class="btn btn-primary">
                     <span>Explore Module &amp; Test Live Demo &rarr;</span>
                   </a>
                 </div>
@@ -2639,11 +2746,10 @@ h1, h2, h3, h4 {
               Whether you want to license <strong>PerfectSearch</strong>, deploy <strong>FestiveFlow</strong>, or hire us for bespoke development, reach out directly.
             </p>
             <div class="closing-actions">
-              <a href="mailto:tdawebservices@gmail.com" class="btn btn-light">
-                <span>Email tdawebservices@gmail.com</span>
+              <a href="#/contact" class="btn btn-light">
+                <span>Contact Us</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
               </a>
-              <a href="#/contact" class="btn btn-outline-light">Contact Form &rarr;</a>
             </div>
           </div>
         </div>
@@ -2680,12 +2786,9 @@ h1, h2, h3, h4 {
             </div>
 
             <div class="pp-actions-row">
-              <button type="button" class="btn btn-primary open-buy-modal" data-product="perfectsearch" data-price="49,99 €">
+              <a href="#/contact" class="btn btn-primary buy-redirect-btn" data-product="perfectsearch" data-price="49,99 €">
                 <span>Acquire License — 49,99 € (One-Time)</span>
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-              </button>
-              <a href="mailto:tdawebservices@gmail.com?subject=PerfectSearch%20Inquiry" class="btn btn-outline">
-                Inquire via Email
               </a>
             </div>
           </div>
@@ -2802,9 +2905,9 @@ h1, h2, h3, h4 {
             </div>
             <div class="order-cta-side">
               <div class="order-price">49,99 €</div>
-              <button type="button" class="btn btn-primary open-buy-modal" data-product="perfectsearch" data-price="49,99 €">
+              <a href="#/contact" class="btn btn-primary buy-redirect-btn" data-product="perfectsearch" data-price="49,99 €">
                 Order License Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -2855,12 +2958,9 @@ h1, h2, h3, h4 {
               </div>
 
               <div class="pp-actions-row">
-                <button type="button" class="btn btn-primary open-buy-modal" data-product="festiveflow" data-price="29,99 €">
+                <a href="#/contact" class="btn btn-primary buy-redirect-btn" data-product="festiveflow" data-price="29,99 €">
                   <span>Acquire License — 29,99 € (One-Time)</span>
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-                </button>
-                <a href="mailto:tdawebservices@gmail.com?subject=FestiveFlow%20Inquiry" class="btn btn-outline">
-                  Inquire via Email
                 </a>
               </div>
             </div>
@@ -2997,9 +3097,9 @@ h1, h2, h3, h4 {
             </div>
             <div class="order-cta-side">
               <div class="order-price">29,99 €</div>
-              <button type="button" class="btn btn-primary open-buy-modal" data-product="festiveflow" data-price="29,99 €">
+              <a href="#/contact" class="btn btn-primary buy-redirect-btn" data-product="festiveflow" data-price="29,99 €">
                 Order License Now
-              </button>
+              </a>
             </div>
           </div>
         </div>
@@ -3262,15 +3362,16 @@ h1, h2, h3, h4 {
           Includes full production package ZIP, lifetime updates, and 1-on-1 author installation on your store.
         </p>
         <div class="modal-actions-col">
-          <a href="mailto:tdawebservices@gmail.com?subject=License%20Purchase%20Inquiry" class="btn btn-primary w-100" id="pm-email-link">
-            <span>Send Order Email to tdawebservices@gmail.com</span>
+          <a href="#/contact" class="btn btn-primary w-100 buy-redirect-btn" id="pm-email-link" data-product="perfectsearch">
+            <span>Order License via TDA</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
           <button type="button" class="btn btn-outline w-100" id="pm-copy-details-btn">
-            📋 Copy Order Summary
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span>Copy Order Summary</span>
           </button>
         </div>
-        <small class="pm-secure">🔒 Secure invoice provided via Stripe direct link or PayPal upon request.</small>
+        <small class="pm-secure">Direct license fulfillment by TDA. Secure invoice provided upon confirmation.</small>
       </div>
     </div>
   </div>
@@ -3314,7 +3415,7 @@ h1, h2, h3, h4 {
     <div class="wrap footer-wrap">
       <div class="footer-col-brand">
         <a href="#/" class="footer-logo">
-          <img src="/assets/images/logo-tda.png" alt="TDA Engineering Studio" class="site-logo-img-footer">
+          <img src="/assets/images/logo-tda.png" alt="TDA Web services" class="site-logo-img-footer">
         </a>
         <p class="footer-tagline">
           High-performance PrestaShop modules &amp; bespoke full-stack engineering. 
@@ -3348,11 +3449,16 @@ h1, h2, h3, h4 {
 
     <div class="sub-footer">
       <div class="wrap sub-footer-wrap">
-        <div>&copy; 2026 TDA Engineering Studio. Crafted for high-conversion e-commerce.</div>
+        <div>&copy; 2026 TDA Web services. Crafted for high-conversion e-commerce.</div>
         <div>Contact: <a href="mailto:tdawebservices@gmail.com">tdawebservices@gmail.com</a></div>
       </div>
     </div>
   </footer>
+
+  <!-- BACK TO TOP BUTTON -->
+  <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
 
   <!-- Application Bundle & Direct Script Loading -->
   <script>
@@ -4076,25 +4182,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (purchaseModal) purchaseModal.classList.add('open');
   }
 
-  function closeOrderModal() {
-    if (purchaseModal) purchaseModal.classList.remove('open');
+  function redirectToContactForProduct(prodKey, price) {
+    const key = prodKey === 'festiveflow' ? 'festiveflow' : 'perfectsearch';
+    const prodName = key === 'festiveflow' ? 'FestiveFlow™' : 'PerfectSearch™';
+    const defaultPrice = key === 'festiveflow' ? '29,99 €' : '49,99 €';
+    const finalPrice = price || defaultPrice;
+
+    closeOrderModal();
+    window.location.hash = '#/contact';
+
+    setTimeout(() => {
+      const select = document.getElementById('contact-interest');
+      if (select) {
+        select.value = key;
+      }
+      const msgArea = document.getElementById('contact-message');
+      if (msgArea) {
+        msgArea.value = `Hello TDA,\n\nI would like to acquire a license for ${prodName} (${finalPrice}). Please provide the invoice and package details.`;
+      }
+      const nameInput = document.getElementById('contact-name');
+      if (nameInput) {
+        nameInput.focus();
+      }
+      const contactCard = document.querySelector('.contact-card');
+      if (contactCard) {
+        contactCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
-  document.querySelectorAll('.open-buy-modal').forEach(b => {
-    b.addEventListener('click', () => {
-      const p = b.getAttribute('data-product') || 'perfectsearch';
-      openOrderModal(p);
+  document.querySelectorAll('.buy-redirect-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const p = btn.getAttribute('data-product') || 'perfectsearch';
+      const pr = btn.getAttribute('data-price') || '';
+      redirectToContactForProduct(p, pr);
     });
   });
+
+  if (pmEmailLink) {
+    pmEmailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const data = productsData[activeProduct] || productsData.perfectsearch;
+      redirectToContactForProduct(activeProduct, data.price);
+    });
+  }
 
   if (purchaseClose) purchaseClose.addEventListener('click', closeOrderModal);
 
   if (pmCopyBtn) {
     pmCopyBtn.addEventListener('click', () => {
       const data = productsData[activeProduct] || productsData.perfectsearch;
-      const text = `Order Request:\nItem: ${data.name}\nPrice: ${data.price}\nDirect Contact: tdawebservices@gmail.com`;
+      const text = `Order Request:\nItem: ${data.name}\nPrice: ${data.price}\nDirect Contact: TDA`;
       navigator.clipboard.writeText(text).then(() => {
-        showToast('📋 Order summary copied to clipboard!');
+        showToast('Order summary copied to clipboard!');
       });
     });
   }
@@ -4291,6 +4432,25 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => t.remove(), 260);
       }, config.timeout);
     }
+  }
+
+
+  /* ===========================================================================
+     8. BACK TO TOP BUTTON
+  =========================================================================== */
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 350) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
 });

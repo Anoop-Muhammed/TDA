@@ -718,25 +718,60 @@ document.addEventListener('DOMContentLoaded', () => {
     if (purchaseModal) purchaseModal.classList.add('open');
   }
 
-  function closeOrderModal() {
-    if (purchaseModal) purchaseModal.classList.remove('open');
+  function redirectToContactForProduct(prodKey, price) {
+    const key = prodKey === 'festiveflow' ? 'festiveflow' : 'perfectsearch';
+    const prodName = key === 'festiveflow' ? 'FestiveFlow™' : 'PerfectSearch™';
+    const defaultPrice = key === 'festiveflow' ? '29,99 €' : '49,99 €';
+    const finalPrice = price || defaultPrice;
+
+    closeOrderModal();
+    window.location.hash = '#/contact';
+
+    setTimeout(() => {
+      const select = document.getElementById('contact-interest');
+      if (select) {
+        select.value = key;
+      }
+      const msgArea = document.getElementById('contact-message');
+      if (msgArea) {
+        msgArea.value = `Hello TDA,\n\nI would like to acquire a license for ${prodName} (${finalPrice}). Please provide the invoice and package details.`;
+      }
+      const nameInput = document.getElementById('contact-name');
+      if (nameInput) {
+        nameInput.focus();
+      }
+      const contactCard = document.querySelector('.contact-card');
+      if (contactCard) {
+        contactCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
   }
 
-  document.querySelectorAll('.open-buy-modal').forEach(b => {
-    b.addEventListener('click', () => {
-      const p = b.getAttribute('data-product') || 'perfectsearch';
-      openOrderModal(p);
+  document.querySelectorAll('.buy-redirect-btn').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const p = btn.getAttribute('data-product') || 'perfectsearch';
+      const pr = btn.getAttribute('data-price') || '';
+      redirectToContactForProduct(p, pr);
     });
   });
+
+  if (pmEmailLink) {
+    pmEmailLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const data = productsData[activeProduct] || productsData.perfectsearch;
+      redirectToContactForProduct(activeProduct, data.price);
+    });
+  }
 
   if (purchaseClose) purchaseClose.addEventListener('click', closeOrderModal);
 
   if (pmCopyBtn) {
     pmCopyBtn.addEventListener('click', () => {
       const data = productsData[activeProduct] || productsData.perfectsearch;
-      const text = `Order Request:\nItem: ${data.name}\nPrice: ${data.price}\nDirect Contact: tdawebservices@gmail.com`;
+      const text = `Order Request:\nItem: ${data.name}\nPrice: ${data.price}\nDirect Contact: TDA`;
       navigator.clipboard.writeText(text).then(() => {
-        showToast('📋 Order summary copied to clipboard!');
+        showToast('Order summary copied to clipboard!');
       });
     });
   }
@@ -933,6 +968,25 @@ document.addEventListener('DOMContentLoaded', () => {
         setTimeout(() => t.remove(), 260);
       }, config.timeout);
     }
+  }
+
+
+  /* ===========================================================================
+     8. BACK TO TOP BUTTON
+  =========================================================================== */
+  const backToTopBtn = document.getElementById('back-to-top');
+  if (backToTopBtn) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 350) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }, { passive: true });
+
+    backToTopBtn.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
   }
 
 });
