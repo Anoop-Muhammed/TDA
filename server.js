@@ -57,7 +57,7 @@ const server = http.createServer((req, res) => {
   }
 
   // Handle SMTP Send Mail API
-  if (req.url === '/api/send-mail' && req.method === 'POST') {
+  if (req.url.startsWith('/api/send-mail') && req.method === 'POST') {
     let body = '';
     req.on('data', chunk => { body += chunk; });
     req.on('end', async () => {

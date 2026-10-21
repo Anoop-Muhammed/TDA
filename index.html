@@ -4343,44 +4343,62 @@ document.addEventListener('DOMContentLoaded', () => {
       submitInquiryBtn.disabled = true;
       submitInquiryBtn.innerHTML = '<span>Sending Message...</span>';
 
-      try {
-        const response = await fetch('/api/send-mail', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
+      const endpoints = ['/api/send-mail', '/api/send-mail.php', 'api/send-mail.php', '/api/send-mail/index.php'];
+      let sentSuccessfully = false;
+      let lastErrorMessage = '';
 
-        const resData = await response.json();
-        if (resData.success) {
-          if (contactSuccessBox) {
-            contactSuccessBox.style.display = 'flex';
-            contactSuccessBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      for (const endpoint of endpoints) {
+        try {
+          const response = await fetch(endpoint, {
+            method: 'POST',
+            headers: { 
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify(payload)
+          });
+
+          const contentType = response.headers.get('content-type') || '';
+          if (response.ok && contentType.includes('application/json')) {
+            const resData = await response.json();
+            if (resData.success) {
+              sentSuccessfully = true;
+              break;
+            } else {
+              lastErrorMessage = resData.error || 'Server rejected submission';
+            }
+          } else if (response.status === 404) {
+            // Endpoint not mapped on this server, try next endpoint
+            continue;
+          } else {
+            lastErrorMessage = `HTTP ${response.status}`;
           }
-          showToast('Your message has been delivered to our senior engineers! We will reply within 4 hours.', { autoClose: false, type: 'success' });
-          submitInquiryBtn.innerHTML = '<span>Message Delivered!</span>';
-          if (document.getElementById('inquiry-form')) {
-            document.getElementById('inquiry-form').reset();
-          }
-          setTimeout(() => {
-            submitInquiryBtn.disabled = false;
-            submitInquiryBtn.innerHTML = '<span>Send Another Message</span>';
-          }, 2500);
-          return;
-        } else {
-          throw new Error(resData.error || 'Server error');
+        } catch (fetchErr) {
+          lastErrorMessage = fetchErr.message;
         }
-      } catch (err) {
-        console.warn('API send mail fetch failed, falling back to mailto:', err.message);
-        // Fallback to mailto link
-        const subject = encodeURIComponent(`[Inquiry] ${interest} from ${name}`);
-        const body = encodeURIComponent(
-          `Hello TDA Engineering Team,\n\nName: ${name} (${email})\nStore URL: ${store}\nInterest: ${interest}\n\nMessage:\n${msg}\n\nLooking forward to hearing from you.`
-        );
-        window.location.href = `mailto:tdawebservices@gmail.com?subject=${subject}&body=${body}`;
-        showToast('Opening email draft to tdawebservices@gmail.com...', { autoClose: false, type: 'success' });
-        submitInquiryBtn.disabled = false;
-        submitInquiryBtn.innerHTML = '<span>Send Message to Engineers</span>';
       }
+
+      if (sentSuccessfully) {
+        if (contactSuccessBox) {
+          contactSuccessBox.style.display = 'flex';
+          contactSuccessBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        showToast('Your message has been delivered to our senior engineers! We will reply within 4 hours.', { autoClose: false, type: 'success' });
+        submitInquiryBtn.innerHTML = '<span>Message Delivered!</span>';
+        if (document.getElementById('inquiry-form')) {
+          document.getElementById('inquiry-form').reset();
+        }
+        setTimeout(() => {
+          submitInquiryBtn.disabled = false;
+          submitInquiryBtn.innerHTML = '<span>Send Another Message</span>';
+        }, 2500);
+        return;
+      }
+
+      console.warn('API send mail failed across endpoints. Last error:', lastErrorMessage);
+      showToast('Could not reach automated mail server. Please try again or email us directly at tdawebservices@gmail.com', { autoClose: false, type: 'error' });
+      submitInquiryBtn.disabled = false;
+      submitInquiryBtn.innerHTML = '<span>Send Message to Engineers</span>';
     });
   }
 

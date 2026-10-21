@@ -9,7 +9,7 @@ export default defineConfig(({ mode }) => {
         name: 'tda-mailer',
         configureServer(server) {
           server.middlewares.use(async (req, res, next) => {
-            if (req.url === '/api/send-mail' && req.method === 'POST') {
+            if (req.url.startsWith('/api/send-mail') && req.method === 'POST') {
               let body = '';
               req.on('data', chunk => { body += chunk; });
               req.on('end', async () => {
