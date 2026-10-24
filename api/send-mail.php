@@ -62,29 +62,60 @@ function sendViaResend($apiKey, $to, $subject, $htmlBody, $replyEmail = '', $rep
     }
 
     $jsonPayload = json_encode($payload);
+    $response = false;
+    $httpCode = 0;
+    $curlErr = '';
 
-    $options = [
-        'http' => [
-            'method' => 'POST',
-            'header' => "Authorization: Bearer {$apiKey}\r\n" .
-                        "Content-Type: application/json\r\n" .
-                        "Accept: application/json\r\n" .
-                        "Content-Length: " . strlen($jsonPayload) . "\r\n",
-            'content' => $jsonPayload,
-            'timeout' => 8,
-            'ignore_errors' => true
-        ],
-        'ssl' => [
-            'verify_peer' => false,
-            'verify_peer_name' => false
-        ]
-    ];
+    // Primary: cURL (Universal support on OpenLiteSpeed & Linux)
+    if (function_exists('curl_init')) {
+        $ch = curl_init($url);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $jsonPayload);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            "Authorization: Bearer {$apiKey}",
+            "Content-Type: application/json",
+            "Accept: application/json"
+        ]);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 10);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 6);
+        $response = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlErr = curl_error($ch);
+        curl_close($ch);
+        
+        if ($curlErr && $log !== null) {
+            $log[] = "cURL error: " . $curlErr;
+        }
+    }
 
-    $ctx = stream_context_create($options);
-    $response = @file_get_contents($url, false, $ctx);
+    // Fallback: file_get_contents if cURL was disabled
+    if ($response === false) {
+        $options = [
+            'http' => [
+                'method' => 'POST',
+                'header' => "Authorization: Bearer {$apiKey}\r\n" .
+                            "Content-Type: application/json\r\n" .
+                            "Accept: application/json\r\n" .
+                            "Content-Length: " . strlen($jsonPayload) . "\r\n",
+                'content' => $jsonPayload,
+                'timeout' => 8,
+                'ignore_errors' => true
+            ],
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false
+            ]
+        ];
+
+        $ctx = stream_context_create($options);
+        $response = @file_get_contents($url, false, $ctx);
+    }
     
     if ($response === false) {
-        throw new Exception("Could not connect to Resend API endpoint (Port 443)");
+        throw new Exception("Could not connect to Resend API endpoint (Port 443). " . ($curlErr ? "cURL error: {$curlErr}" : "allow_url_fopen disabled"));
     }
 
     $json = json_decode($response, true);
