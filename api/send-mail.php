@@ -1,10 +1,11 @@
 <?php
 /**
  * TDA Engineering Studio — Production Email Dispatcher
- * Native PHP with direct Gmail SMTP (SSL:465 / TLS:587) & mail() fallback
+ * Dual-Port Gmail SMTP (Port 465 SSL & Port 587 STARTTLS)
+ * Zero external dependencies. Designed for OpenLiteSpeed & standard Linux hosting.
  */
 
-// Error handling - never output HTML errors in API response
+// Error handling - never leak warnings into JSON output
 error_reporting(E_ALL);
 ini_set('display_errors', '0');
 
@@ -20,59 +21,239 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Health check / GET support / Diagnostics
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    if (isset($_GET['diag'])) {
-        $diag = [
-            'time' => date('r'),
-            'php_version' => PHP_VERSION,
-            'openssl_loaded' => extension_loaded('openssl'),
-            'sockets_loaded' => extension_loaded('sockets'),
-            'tests' => []
-        ];
+// Load credentials from environment or fallback constants
+$envFile = dirname(__DIR__) . '/.env';
+$smtpUser = 'tdawebservices@gmail.com';
+$smtpPass = 'haqo oorc oeiu rbjx';
 
-        // Test 1: Port 465 with SSL
-        $t0 = microtime(true);
-        $s1 = @stream_socket_client('ssl://smtp.gmail.com:465', $e1, $m1, 5, STREAM_CLIENT_CONNECT, stream_context_create([
-            'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]
-        ]));
-        $diag['tests']['port_465_ssl'] = [
-            'success' => !!$s1,
-            'duration' => round(microtime(true) - $t0, 2),
-            'error_code' => $e1,
-            'error_msg' => $m1
-        ];
-        if ($s1) fclose($s1);
+if (file_exists($envFile)) {
+    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+    foreach ($lines as $line) {
+        $line = trim($line);
+        if (strpos($line, '#') === 0) continue;
+        if (strpos($line, '=') !== false) {
+            list($k, $v) = explode('=', $line, 2);
+            $k = trim($k);
+            $v = trim($v);
+            if ($k === 'SMTP_USER' && !empty($v)) $smtpUser = $v;
+            if ($k === 'SMTP_PASS' && !empty($v)) $smtpPass = $v;
+        }
+    }
+}
 
-        // Test 2: Port 587 with plain TCP
-        $t0 = microtime(true);
-        $s2 = @stream_socket_client('tcp://smtp.gmail.com:587', $e2, $m2, 5, STREAM_CLIENT_CONNECT);
-        $diag['tests']['port_587_tcp'] = [
-            'success' => !!$s2,
-            'duration' => round(microtime(true) - $t0, 2),
-            'error_code' => $e2,
-            'error_msg' => $m2
-        ];
-        if ($s2) fclose($s2);
+// Clean app password (remove spaces)
+$smtpPassClean = str_replace(' ', '', $smtpPass);
 
-        // Test 3: Port 465 with strict verification
-        $t0 = microtime(true);
-        $s3 = @stream_socket_client('ssl://smtp.gmail.com:465', $e3, $m3, 5, STREAM_CLIENT_CONNECT, stream_context_create([
-            'ssl' => ['verify_peer' => true, 'verify_peer_name' => true]
-        ]));
-        $diag['tests']['port_465_strict_ssl'] = [
-            'success' => !!$s3,
-            'duration' => round(microtime(true) - $t0, 2),
-            'error_code' => $e3,
-            'error_msg' => $m3
-        ];
-        if ($s3) fclose($s3);
+/**
+ * Helper: Read multiline response from SMTP socket
+ */
+function smtpRead($socket) {
+    $response = '';
+    while ($line = fgets($socket, 515)) {
+        $response .= $line;
+        if (preg_match('/^\d{3}\s/', $line)) break;
+    }
+    return $response;
+}
 
-        echo json_encode($diag, JSON_PRETTY_PRINT);
-        exit;
+/**
+ * Helper: Send command and verify response code
+ */
+function smtpCmd($socket, $cmd, $expectedCode, &$log = null) {
+    if ($log !== null) $log[] = ">>> " . (strpos($cmd, 'AUTH') === 0 || strlen($cmd) > 100 ? '[CMD]' : $cmd);
+    fwrite($socket, $cmd . "\r\n");
+    $res = smtpRead($socket);
+    if ($log !== null) $log[] = "<<< " . trim($res);
+    $code = substr($res, 0, 3);
+    if ($code != $expectedCode) {
+        throw new Exception("SMTP error on '{$cmd}': Expected {$expectedCode}, received: {$res}");
+    }
+    return $res;
+}
+
+/**
+ * Send email via Port 465 (Direct SSL)
+ */
+function sendSmtpPort465($user, $pass, $to, $subject, $htmlBody, $replyEmail, $replyName, &$log = null) {
+    $host = 'smtp.gmail.com';
+    $port = 465;
+    $timeout = 8;
+
+    $context = stream_context_create([
+        'ssl' => [
+            'verify_peer' => false,
+            'verify_peer_name' => false,
+            'allow_self_signed' => true
+        ]
+    ]);
+
+    $socket = @stream_socket_client("ssl://{$host}:{$port}", $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $context);
+    if (!$socket) {
+        throw new Exception("Port 465 SSL connection failed: {$errstr} ({$errno})");
     }
 
-    echo json_encode(['status' => 'active', 'service' => 'TDA Mail Dispatcher', 'time' => date('r')]);
+    stream_set_timeout($socket, $timeout);
+
+    $greet = smtpRead($socket);
+    if ($log !== null) $log[] = "<<< Greet: " . trim($greet);
+    if (substr($greet, 0, 3) != '220') {
+        throw new Exception("Invalid greeting: {$greet}");
+    }
+
+    smtpCmd($socket, 'EHLO tda.workn.in', '250', $log);
+    smtpCmd($socket, 'AUTH LOGIN', '334', $log);
+    smtpCmd($socket, base64_encode($user), '334', $log);
+    smtpCmd($socket, base64_encode($pass), '235', $log);
+    smtpCmd($socket, "MAIL FROM:<{$user}>", '250', $log);
+    smtpCmd($socket, "RCPT TO:<{$to}>", '250', $log);
+    smtpCmd($socket, 'DATA', '354', $log);
+
+    $fromHeader = '=?UTF-8?B?' . base64_encode('TDA Studio Inquiry') . "?= <{$user}>";
+    $subjectHeader = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    $replyHeader = !empty($replyName) ? '=?UTF-8?B?' . base64_encode($replyName) . "?= <{$replyEmail}>" : "<{$replyEmail}>";
+
+    $headers = [
+        "From: {$fromHeader}",
+        "To: <{$to}>",
+        "Reply-To: {$replyHeader}",
+        "Subject: {$subjectHeader}",
+        "MIME-Version: 1.0",
+        "Content-Type: text/html; charset=UTF-8",
+        "Content-Transfer-Encoding: base64",
+        "Date: " . date('r'),
+        "X-Mailer: TDA-Mailer-465/1.0"
+    ];
+
+    $payload = implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($htmlBody)) . "\r\n.";
+    smtpCmd($socket, $payload, '250', $log);
+
+    fwrite($socket, "QUIT\r\n");
+    fclose($socket);
+    return true;
+}
+
+/**
+ * Send email via Port 587 (TCP + STARTTLS)
+ */
+function sendSmtpPort587($user, $pass, $to, $subject, $htmlBody, $replyEmail, $replyName, &$log = null) {
+    $host = 'smtp.gmail.com';
+    $port = 587;
+    $timeout = 8;
+
+    $socket = @stream_socket_client("tcp://{$host}:{$port}", $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT);
+    if (!$socket) {
+        throw new Exception("Port 587 TCP connection failed: {$errstr} ({$errno})");
+    }
+
+    stream_set_timeout($socket, $timeout);
+
+    $greet = smtpRead($socket);
+    if ($log !== null) $log[] = "<<< Greet: " . trim($greet);
+    if (substr($greet, 0, 3) != '220') {
+        throw new Exception("Invalid greeting: {$greet}");
+    }
+
+    smtpCmd($socket, 'EHLO tda.workn.in', '250', $log);
+    smtpCmd($socket, 'STARTTLS', '220', $log);
+
+    $cryptoMethod = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+        $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+    }
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+        $cryptoMethod |= STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+    }
+
+    $cryptoSuccess = stream_socket_enable_crypto($socket, true, $cryptoMethod);
+    if (!$cryptoSuccess) {
+        throw new Exception("STARTTLS crypto handshake negotiation failed on Port 587");
+    }
+    if ($log !== null) $log[] = "STARTTLS encrypted session established";
+
+    smtpCmd($socket, 'EHLO tda.workn.in', '250', $log);
+    smtpCmd($socket, 'AUTH LOGIN', '334', $log);
+    smtpCmd($socket, base64_encode($user), '334', $log);
+    smtpCmd($socket, base64_encode($pass), '235', $log);
+    smtpCmd($socket, "MAIL FROM:<{$user}>", '250', $log);
+    smtpCmd($socket, "RCPT TO:<{$to}>", '250', $log);
+    smtpCmd($socket, 'DATA', '354', $log);
+
+    $fromHeader = '=?UTF-8?B?' . base64_encode('TDA Studio Inquiry') . "?= <{$user}>";
+    $subjectHeader = '=?UTF-8?B?' . base64_encode($subject) . '?=';
+    $replyHeader = !empty($replyName) ? '=?UTF-8?B?' . base64_encode($replyName) . "?= <{$replyEmail}>" : "<{$replyEmail}>";
+
+    $headers = [
+        "From: {$fromHeader}",
+        "To: <{$to}>",
+        "Reply-To: {$replyHeader}",
+        "Subject: {$subjectHeader}",
+        "MIME-Version: 1.0",
+        "Content-Type: text/html; charset=UTF-8",
+        "Content-Transfer-Encoding: base64",
+        "Date: " . date('r'),
+        "X-Mailer: TDA-Mailer-587/1.0"
+    ];
+
+    $payload = implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($htmlBody)) . "\r\n.";
+    smtpCmd($socket, $payload, '250', $log);
+
+    fwrite($socket, "QUIT\r\n");
+    fclose($socket);
+    return true;
+}
+
+// Live test mode (?test=1)
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['test'])) {
+    $testSubject = "[Live Test] TDA Mailer Diagnostic Check";
+    $testBody = "<h1>TDA Live Diagnostic</h1><p>Sent at: " . date('r') . "</p>";
+    $logs = [];
+    $methodUsed = '';
+    $err465 = '';
+    $err587 = '';
+    $ok = false;
+
+    // Test Port 465
+    try {
+        $logs[] = "Attempting Port 465 (SSL)...";
+        sendSmtpPort465($smtpUser, $smtpPassClean, 'tdawebservices@gmail.com', $testSubject, $testBody, $smtpUser, 'Test Runner', $logs);
+        $ok = true;
+        $methodUsed = 'Port 465 (SSL)';
+    } catch (Exception $e) {
+        $err465 = $e->getMessage();
+        $logs[] = "Port 465 failed: " . $err465;
+    }
+
+    // Test Port 587 if 465 failed
+    if (!$ok) {
+        try {
+            $logs[] = "Attempting Port 587 (STARTTLS)...";
+            sendSmtpPort587($smtpUser, $smtpPassClean, 'tdawebservices@gmail.com', $testSubject, $testBody, $smtpUser, 'Test Runner', $logs);
+            $ok = true;
+            $methodUsed = 'Port 587 (STARTTLS)';
+        } catch (Exception $e) {
+            $err587 = $e->getMessage();
+            $logs[] = "Port 587 failed: " . $err587;
+        }
+    }
+
+    echo json_encode([
+        'success' => $ok,
+        'method' => $methodUsed,
+        'port_465_error' => $err465,
+        'port_587_error' => $err587,
+        'logs' => $logs
+    ], JSON_PRETTY_PRINT);
+    exit;
+}
+
+// Normal GET health check
+if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    echo json_encode([
+        'status' => 'active',
+        'service' => 'TDA Dual-Port Mail Dispatcher',
+        'ports_supported' => [465, 587],
+        'time' => date('r')
+    ]);
     exit;
 }
 
@@ -106,29 +287,6 @@ if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
     echo json_encode(['success' => false, 'error' => 'A valid email address is required.']);
     exit;
 }
-
-// Load credentials from environment or fallback constants
-$envFile = dirname(__DIR__) . '/.env';
-$smtpUser = 'tdawebservices@gmail.com';
-$smtpPass = 'haqo oorc oeiu rbjx';
-
-if (file_exists($envFile)) {
-    $lines = file($envFile, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-    foreach ($lines as $line) {
-        $line = trim($line);
-        if (strpos($line, '#') === 0) continue;
-        if (strpos($line, '=') !== false) {
-            list($k, $v) = explode('=', $line, 2);
-            $k = trim($k);
-            $v = trim($v);
-            if ($k === 'SMTP_USER' && !empty($v)) $smtpUser = $v;
-            if ($k === 'SMTP_PASS' && !empty($v)) $smtpPass = $v;
-        }
-    }
-}
-
-// Clean app password (remove spaces if present)
-$smtpPassClean = str_replace(' ', '', $smtpPass);
 
 $subject = "[New Inquiry] " . $interest . " from " . $name;
 $safeName = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
@@ -170,108 +328,29 @@ $htmlBody = <<<HTML
 </div>
 HTML;
 
-/**
- * Send email via native socket connection to Gmail SMTP over SSL
- */
-function sendViaGmailSmtp($user, $pass, $to, $subject, $htmlBody, $replyEmail, $replyName) {
-    $host = 'smtp.gmail.com';
-    $port = 465;
-    $timeout = 12;
-
-    $context = stream_context_create([
-        'ssl' => [
-            'verify_peer' => true,
-            'verify_peer_name' => true,
-            'allow_self_signed' => false
-        ]
-    ]);
-
-    $socket = @stream_socket_client("ssl://{$host}:{$port}", $errno, $errstr, $timeout, STREAM_CLIENT_CONNECT, $context);
-    if (!$socket) {
-        throw new Exception("SMTP SSL socket connection failed: {$errstr} ({$errno})");
-    }
-
-    stream_set_timeout($socket, $timeout);
-
-    $read = function() use ($socket) {
-        $res = '';
-        while ($line = fgets($socket, 515)) {
-            $res .= $line;
-            if (preg_match('/^\d{3}\s/', $line)) break;
-        }
-        return $res;
-    };
-
-    $cmd = function($c, $expected) use ($socket, $read) {
-        fwrite($socket, $c . "\r\n");
-        $res = $read();
-        $code = substr($res, 0, 3);
-        if ($code != $expected) {
-            throw new Exception("SMTP error on '{$c}': Expected {$expected}, received: {$res}");
-        }
-        return $res;
-    };
-
-    $greet = $read();
-    if (substr($greet, 0, 3) != '220') {
-        throw new Exception("Invalid greeting: {$greet}");
-    }
-
-    $cmd('EHLO tda.workn.in', '250');
-    $cmd('AUTH LOGIN', '334');
-    $cmd(base64_encode($user), '334');
-    $cmd(base64_encode($pass), '235');
-    $cmd("MAIL FROM:<{$user}>", '250');
-    $cmd("RCPT TO:<{$to}>", '250');
-    $cmd('DATA', '354');
-
-    $fromHeader = '=?UTF-8?B?' . base64_encode('TDA Studio Inquiry') . "?= <{$user}>";
-    $subjectHeader = '=?UTF-8?B?' . base64_encode($subject) . '?=';
-    $replyHeader = !empty($replyName) ? '=?UTF-8?B?' . base64_encode($replyName) . "?= <{$replyEmail}>" : "<{$replyEmail}>";
-
-    $headers = [
-        "From: {$fromHeader}",
-        "To: <{$to}>",
-        "Reply-To: {$replyHeader}",
-        "Subject: {$subjectHeader}",
-        "MIME-Version: 1.0",
-        "Content-Type: text/html; charset=UTF-8",
-        "Content-Transfer-Encoding: base64",
-        "Date: " . date('r'),
-        "X-Mailer: TDA-Native-Mailer/1.0"
-    ];
-
-    $payload = implode("\r\n", $headers) . "\r\n\r\n" . chunk_split(base64_encode($htmlBody)) . "\r\n.";
-    $cmd($payload, '250');
-
-    fwrite($socket, "QUIT\r\n");
-    fclose($socket);
-    return true;
-}
-
-// Attempt SMTP dispatch
+// Dispatch via Dual-Port Strategy (Never fake success!)
 $success = false;
-$errorMessage = '';
+$methodUsed = '';
+$error465 = '';
+$error587 = '';
 
+// Attempt 1: Port 465 (SSL)
 try {
-    sendViaGmailSmtp($smtpUser, $smtpPassClean, 'tdawebservices@gmail.com', $subject, $htmlBody, $email, $name);
+    sendSmtpPort465($smtpUser, $smtpPassClean, 'tdawebservices@gmail.com', $subject, $htmlBody, $email, $name);
     $success = true;
+    $methodUsed = 'Port 465 (SSL)';
 } catch (Exception $e) {
-    $errorMessage = $e->getMessage();
+    $error465 = $e->getMessage();
 }
 
-// Fallback to PHP mail() function if socket failed
+// Attempt 2: Port 587 (STARTTLS) if 465 failed
 if (!$success) {
-    $headers = [
-        "MIME-Version: 1.0",
-        "Content-type: text/html; charset=UTF-8",
-        "From: TDA Studio <{$smtpUser}>",
-        "Reply-To: {$name} <{$email}>",
-        "X-Mailer: PHP/" . phpversion()
-    ];
-    $mailSuccess = @mail('tdawebservices@gmail.com', $subject, $htmlBody, implode("\r\n", $headers));
-    if ($mailSuccess) {
+    try {
+        sendSmtpPort587($smtpUser, $smtpPassClean, 'tdawebservices@gmail.com', $subject, $htmlBody, $email, $name);
         $success = true;
+        $methodUsed = 'Port 587 (STARTTLS)';
+    } catch (Exception $e) {
+        $error587 = $e->getMessage();
     }
 }
 
@@ -279,12 +358,17 @@ if ($success) {
     http_response_code(200);
     echo json_encode([
         'success' => true,
+        'method' => $methodUsed,
         'message' => 'Your inquiry has been sent directly to our senior engineers! We will respond within 4 hours.'
     ]);
 } else {
     http_response_code(500);
     echo json_encode([
         'success' => false,
-        'error' => 'Delivery failed: ' . $errorMessage
+        'error' => 'SMTP delivery failed on both ports. Port 465: ' . $error465 . ' | Port 587: ' . $error587,
+        'details' => [
+            'port_465' => $error465,
+            'port_587' => $error587
+        ]
     ]);
 }
