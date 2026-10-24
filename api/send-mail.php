@@ -20,8 +20,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
     exit;
 }
 
-// Health check / GET support
+// Health check / GET support / Diagnostics
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+    if (isset($_GET['diag'])) {
+        $diag = [
+            'time' => date('r'),
+            'php_version' => PHP_VERSION,
+            'openssl_loaded' => extension_loaded('openssl'),
+            'sockets_loaded' => extension_loaded('sockets'),
+            'tests' => []
+        ];
+
+        // Test 1: Port 465 with SSL
+        $t0 = microtime(true);
+        $s1 = @stream_socket_client('ssl://smtp.gmail.com:465', $e1, $m1, 5, STREAM_CLIENT_CONNECT, stream_context_create([
+            'ssl' => ['verify_peer' => false, 'verify_peer_name' => false]
+        ]));
+        $diag['tests']['port_465_ssl'] = [
+            'success' => !!$s1,
+            'duration' => round(microtime(true) - $t0, 2),
+            'error_code' => $e1,
+            'error_msg' => $m1
+        ];
+        if ($s1) fclose($s1);
+
+        // Test 2: Port 587 with plain TCP
+        $t0 = microtime(true);
+        $s2 = @stream_socket_client('tcp://smtp.gmail.com:587', $e2, $m2, 5, STREAM_CLIENT_CONNECT);
+        $diag['tests']['port_587_tcp'] = [
+            'success' => !!$s2,
+            'duration' => round(microtime(true) - $t0, 2),
+            'error_code' => $e2,
+            'error_msg' => $m2
+        ];
+        if ($s2) fclose($s2);
+
+        // Test 3: Port 465 with strict verification
+        $t0 = microtime(true);
+        $s3 = @stream_socket_client('ssl://smtp.gmail.com:465', $e3, $m3, 5, STREAM_CLIENT_CONNECT, stream_context_create([
+            'ssl' => ['verify_peer' => true, 'verify_peer_name' => true]
+        ]));
+        $diag['tests']['port_465_strict_ssl'] = [
+            'success' => !!$s3,
+            'duration' => round(microtime(true) - $t0, 2),
+            'error_code' => $e3,
+            'error_msg' => $m3
+        ];
+        if ($s3) fclose($s3);
+
+        echo json_encode($diag, JSON_PRETTY_PRINT);
+        exit;
+    }
+
     echo json_encode(['status' => 'active', 'service' => 'TDA Mail Dispatcher', 'time' => date('r')]);
     exit;
 }
