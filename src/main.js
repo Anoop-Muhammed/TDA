@@ -857,14 +857,23 @@ document.addEventListener('DOMContentLoaded', () => {
   if (submitInquiryBtn) {
     submitInquiryBtn.addEventListener('click', async () => {
       const interest = document.getElementById('contact-interest')?.value || 'general';
-      const name = document.getElementById('contact-name')?.value || 'Prospective Client';
-      const email = document.getElementById('contact-email')?.value || '';
-      const store = document.getElementById('contact-store')?.value || 'Not specified';
-      const msg = document.getElementById('contact-message')?.value || '';
+      const name = (document.getElementById('contact-name')?.value || '').trim() || 'Prospective Client';
+      const emailInput = document.getElementById('contact-email');
+      const email = (emailInput?.value || '').trim();
+      const store = (document.getElementById('contact-store')?.value || '').trim() || 'Not specified';
+      const msg = (document.getElementById('contact-message')?.value || '').trim();
 
       if (!email) {
-        showToast('Please enter your email address so we can reply.');
-        document.getElementById('contact-email')?.focus();
+        showToast('Please enter your email address so we can reply.', { autoClose: true, type: 'error' });
+        emailInput?.focus();
+        return;
+      }
+
+      // RFC-compliant email structure validation regex
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast('Please enter a valid email address (e.g. name@store.com).', { autoClose: true, type: 'error' });
+        emailInput?.focus();
         return;
       }
 
@@ -895,19 +904,25 @@ document.addEventListener('DOMContentLoaded', () => {
           });
 
           const contentType = response.headers.get('content-type') || '';
-          if (response.ok && contentType.includes('application/json')) {
-            const resData = await response.json();
-            if (resData.success) {
-              sentSuccessfully = true;
-              break;
-            } else {
-              lastErrorMessage = resData.error || 'Server rejected submission';
-            }
+          let resData = null;
+          if (contentType.includes('application/json')) {
+            try {
+              resData = await response.json();
+            } catch (_) {}
+          }
+
+          if (response.ok && resData && resData.success) {
+            sentSuccessfully = true;
+            break;
           } else if (response.status === 404) {
             // Endpoint not mapped on this server, try next endpoint
             continue;
           } else {
-            lastErrorMessage = `HTTP ${response.status}`;
+            lastErrorMessage = (resData && resData.error) ? resData.error : `HTTP ${response.status}`;
+            // If the server explicitly rejected the input (e.g. 400 Bad Request), stop trying alternate endpoints
+            if (response.status === 400) {
+              break;
+            }
           }
         } catch (fetchErr) {
           lastErrorMessage = fetchErr.message;
@@ -932,7 +947,10 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       console.warn('API send mail failed across endpoints. Last error:', lastErrorMessage);
-      showToast('Could not reach automated mail server. Please try again or email us directly at tdawebservices@gmail.com', { autoClose: false, type: 'error' });
+      const userMessage = lastErrorMessage 
+        ? `${lastErrorMessage}` 
+        : 'Could not send message. Please try again or email us directly at tdawebservices@gmail.com';
+      showToast(userMessage, { autoClose: false, type: 'error' });
       submitInquiryBtn.disabled = false;
       submitInquiryBtn.innerHTML = '<span>Send Message to Engineers</span>';
     });
